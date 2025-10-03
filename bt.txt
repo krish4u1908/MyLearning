@@ -12329,3 +12329,623 @@ Which of those would you like me to do next?
 
 No file chosenNo file chosen
 ChatGPT can make mistakes. Check important info. See Cookie Preferences.
+
+(gdb) bt
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+#1  0x0000000000429ae0 in ylPopHead (pList=pList@entry=0xf43ce0) at ../src/ylib-list.c:168
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+#3  0x000000000042534f in qvPoolAlloc (pool=<optimized out>) at ../src/cpool.c:286
+#4  0x0000000000426378 in cvContextAlloc (cpool=cpool@entry=0x43b598 <dp_glb_ctxt+248>) at ../src/stacklayer.c:389
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+#6  0x00000000004048a9 in lte_dp_handle_add_gtp_lookup_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0x7fffc9cd5ec0,
+    p_dp_sw_glb=0x43b4a0 <dp_glb_ctxt>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:362
+#7  0x000000000040d2c2 in lte_s_dp_tunnel_activate (p_lte_mod_cntxt=p_lte_mod_cntxt@entry=0xf40110, p_session_cntxt=p_session_cntxt@entry=0xf30110,
+    p_bearer_cntxt=p_bearer_cntxt@entry=0xf30180, p_ecode=p_ecode@entry=0xf30104)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:152
+#8  0x000000000040f694 in lte_dp_tunnel_activate_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:3809
+#9  0x000000000040c7a8 in lte_dp_sig_msg_handler (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100,
+    g_glb_ctxt=0x43b4a0 <dp_glb_ctxt>, from_addr=...) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:5115
+#10 0x0000000000402e76 in lte_dp_process_sig_api (p_mod_ctx=0xf40110, fd=7, p_write_buffer=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:344
+#11 0x0000000000403ceb in lte_dp_sig_driver_loop (thread=thread@entry=0x67d500 <thread_info>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:856
+#12 0x00000000004029a1 in main (C=<optimized out>, V=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_main.c:171
+(gdb)
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+#1  0x0000000000429ae0 in ylPopHead (pList=pList@entry=0xf43ce0) at ../src/ylib-list.c:168
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+#3  0x000000000042534f in qvPoolAlloc (pool=<optimized out>) at ../src/cpool.c:286
+#4  0x0000000000426378 in cvContextAlloc (cpool=cpool@entry=0x43b598 <dp_glb_ctxt+248>) at ../src/stacklayer.c:389
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+#6  0x00000000004048a9 in lte_dp_handle_add_gtp_lookup_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0x7fffc9cd5ec0,
+    p_dp_sw_glb=0x43b4a0 <dp_glb_ctxt>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:362
+#7  0x000000000040d2c2 in lte_s_dp_tunnel_activate (p_lte_mod_cntxt=p_lte_mod_cntxt@entry=0xf40110, p_session_cntxt=p_session_cntxt@entry=0xf30110,
+    p_bearer_cntxt=p_bearer_cntxt@entry=0xf30180, p_ecode=p_ecode@entry=0xf30104)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:152
+#8  0x000000000040f694 in lte_dp_tunnel_activate_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:3809
+#9  0x000000000040c7a8 in lte_dp_sig_msg_handler (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100,
+    g_glb_ctxt=0x43b4a0 <dp_glb_ctxt>, from_addr=...) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:5115
+#10 0x0000000000402e76 in lte_dp_process_sig_api (p_mod_ctx=0xf40110, fd=7, p_write_buffer=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:344
+#11 0x0000000000403ceb in lte_dp_sig_driver_loop (thread=thread@entry=0x67d500 <thread_info>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:856
+#12 0x00000000004029a1 in main (C=<optimized out>, V=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_main.c:171
+(gdb)
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+#1  0x0000000000429ae0 in ylPopHead (pList=pList@entry=0xf43ce0) at ../src/ylib-list.c:168
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+#3  0x000000000042534f in qvPoolAlloc (pool=<optimized out>) at ../src/cpool.c:286
+#4  0x0000000000426378 in cvContextAlloc (cpool=cpool@entry=0x43b598 <dp_glb_ctxt+248>) at ../src/stacklayer.c:389
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+#6  0x00000000004048a9 in lte_dp_handle_add_gtp_lookup_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0x7fffc9cd5ec0,
+    p_dp_sw_glb=0x43b4a0 <dp_glb_ctxt>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:362
+#7  0x000000000040d2c2 in lte_s_dp_tunnel_activate (p_lte_mod_cntxt=p_lte_mod_cntxt@entry=0xf40110, p_session_cntxt=p_session_cntxt@entry=0xf30110,
+    p_bearer_cntxt=p_bearer_cntxt@entry=0xf30180, p_ecode=p_ecode@entry=0xf30104)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:152
+#8  0x000000000040f694 in lte_dp_tunnel_activate_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:3809
+#9  0x000000000040c7a8 in lte_dp_sig_msg_handler (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100,
+    g_glb_ctxt=0x43b4a0 <dp_glb_ctxt>, from_addr=...) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:5115
+#10 0x0000000000402e76 in lte_dp_process_sig_api (p_mod_ctx=0xf40110, fd=7, p_write_buffer=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:344
+#11 0x0000000000403ceb in lte_dp_sig_driver_loop (thread=thread@entry=0x67d500 <thread_info>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:856
+#12 0x00000000004029a1 in main (C=<optimized out>, V=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_main.c:171
+(gdb) fr 5
+Ambiguous command "fr 5": frame, freelist.
+(gdb) f 5
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+warning: 96     /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c: No such file or directory
+(gdb) p *(qmpool *)0x43b598
+$7 = {magic = 1095216660482632, size = 510001, nbuf = 63750, alloc = 16006320, chunks = {node = {next = 0x0, previous = 0x0}, count = 0}, list = {node = {
+      next = 0x0, previous = 0x0}, count = 0}, lock = 0x3e41800000050, idx_mask = 510001, inc_mask = 63750, final_mask = 16000192, idx_bits = 0}
+(gdb) f 2
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+warning: 307    ../src/cpool.c: No such file or directory
+(gdb) p *(qmpool *)0xf43cb0
+$8 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+(gdb) t 1
+[Switching to thread 1 (Thread 0x7f77f36d2740 (LWP 1965205))]
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+warning: 64     ../src/ylib-list.c: No such file or directory
+(gdb) t 4
+[Switching to thread 4 (Thread 0x7f77355b5640 (LWP 1965259))]
+#0  0x00007f77f34873f0 in __lll_lock_wait () from /lib64/libc.so.6
+(gdb) t 5
+[Switching to thread 5 (Thread 0x7f77385bb640 (LWP 1965253))]
+#0  0x00007f77f348722a in __futex_abstimed_wait_common () from /lib64/libc.so.6
+(gdb) t 4
+[Switching to thread 4 (Thread 0x7f77355b5640 (LWP 1965259))]
+#0  0x00007f77f34873f0 in __lll_lock_wait () from /lib64/libc.so.6
+(gdb) bt
+#0  0x00007f77f34873f0 in __lll_lock_wait () from /lib64/libc.so.6
+#1  0x00007f77f348d582 in pthread_mutex_lock@@GLIBC_2.2.5 () from /lib64/libc.so.6
+#2  0x000000000041e148 in lte_mutex_lock (lock=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../port/src/lte_port.c:120
+#3  0x0000000000420e7e in qvLock (lock=<optimized out>) at ../src/cspl.c:4139
+#4  0x000000000042584b in qvPoolLocateEx (Q=0xf43cb0, indexparam=indexparam@entry=6965750, cErr=cErr@entry=0x0) at ../src/cpool.c:802
+#5  0x0000000000425984 in qvPoolLocate (Q=<optimized out>, indexparam=indexparam@entry=6965750) at ../src/cpool.c:786
+#6  0x000000000041153e in lte_pool_locate (Q=<optimized out>, buf_index=buf_index@entry=6965750)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:131
+#7  0x000000000041a3d3 in lte_dp_extract_worker_thread_id (teid_val=6965750, p_thread_id=p_thread_id@entry=0x7f77355b4d4f "",
+    p_p_gtp_ingress_obj=p_p_gtp_ingress_obj@entry=0x7f77355b4d10, direction=direction@entry=1 '\001')
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_utility.c:887
+#8  0x0000000000417b6a in lte_dp_process_recvd_pkt (fd=fd@entry=27, p_recv_buff=p_recv_buff@entry=0x7f76ea4d7010, p_msgs=p_msgs@entry=0x682e20 <msgs+6144>,
+    recv_count=recv_count@entry=1, ip_addr_type=ip_addr_type@entry=1 '\001', direction=direction@entry=1 '\001')
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_proc_gtpu.c:983
+#9  0x0000000000417f59 in lte_dp_recv_v4_dnlink_pkt (p_mod_ctx=<optimized out>, fd=27, message=0x7f76ea4d7010)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_proc_gtpu.c:542
+#10 0x00000000004160cd in lte_dp_gtpu_driver_loop (ptr=<optimized out>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_proc_gtpu.c:146
+#11 0x00007f77f348a19a in start_thread () from /lib64/libc.so.6
+#12 0x00007f77f350f210 in clone3 () from /lib64/libc.so.6
+(gdb) f 4
+#4  0x000000000042584b in qvPoolLocateEx (Q=0xf43cb0, indexparam=indexparam@entry=6965750, cErr=cErr@entry=0x0) at ../src/cpool.c:802
+warning: 802    ../src/cpool.c: No such file or directory
+(gdb) p *(qmpool *)0xf43cb0
+$9 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+(gdb)
+$10 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+(gdb)
+$11 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+(gdb) p *(qmpool *)0xf43cb0
+$12 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+(gdb) f 0
+#0  0x00007f77f34873f0 in __lll_lock_wait () from /lib64/libc.so.6
+(gdb) t 1
+[Switching to thread 1 (Thread 0x7f77f36d2740 (LWP 1965205))]
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+warning: 64     ../src/ylib-list.c: No such file or directory
+(gdb) p/x pNode
+$13 = 0x7f77cab01088
+(gdb) p/x *(struct YLNODE *) pNode
+No struct type named YLNODE.
+(gdb) bt
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+#1  0x0000000000429ae0 in ylPopHead (pList=pList@entry=0xf43ce0) at ../src/ylib-list.c:168
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+#3  0x000000000042534f in qvPoolAlloc (pool=<optimized out>) at ../src/cpool.c:286
+#4  0x0000000000426378 in cvContextAlloc (cpool=cpool@entry=0x43b598 <dp_glb_ctxt+248>) at ../src/stacklayer.c:389
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+#6  0x00000000004048a9 in lte_dp_handle_add_gtp_lookup_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0x7fffc9cd5ec0,
+    p_dp_sw_glb=0x43b4a0 <dp_glb_ctxt>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:362
+#7  0x000000000040d2c2 in lte_s_dp_tunnel_activate (p_lte_mod_cntxt=p_lte_mod_cntxt@entry=0xf40110, p_session_cntxt=p_session_cntxt@entry=0xf30110,
+    p_bearer_cntxt=p_bearer_cntxt@entry=0xf30180, p_ecode=p_ecode@entry=0xf30104)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:152
+#8  0x000000000040f694 in lte_dp_tunnel_activate_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:3809
+#9  0x000000000040c7a8 in lte_dp_sig_msg_handler (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100,
+    g_glb_ctxt=0x43b4a0 <dp_glb_ctxt>, from_addr=...) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:5115
+#10 0x0000000000402e76 in lte_dp_process_sig_api (p_mod_ctx=0xf40110, fd=7, p_write_buffer=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:344
+#11 0x0000000000403ceb in lte_dp_sig_driver_loop (thread=thread@entry=0x67d500 <thread_info>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:856
+#12 0x00000000004029a1 in main (C=<optimized out>, V=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_main.c:171
+(gdb) f 0
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+64      in ../src/ylib-list.c
+(gdb) p/x *(struct YLNODE *) pNode
+No struct type named YLNODE.
+(gdb) p/x *(struct __ylnode__ *) pNode
+$14 = {next = 0x7b97040028800da3, previous = 0x0}
+(gdb) p/x (struct qmbuf *) pNode
+$15 = 0x7f77cab01088
+(gdb) p/x *(struct qmbuf *) pNode
+$16 = {u = {__header__ = {next = 0x7b97040028800da3, previous = 0x0}, pool = 0x7b97040028800da3}, incarnation = 0x1221, allocated = 0xa4}
+(gdb) p/x *(struct qmbuf *) pNode
+$17 = {u = {__header__ = {next = 0x7b97040028800da3, previous = 0x0}, pool = 0x7b97040028800da3}, incarnation = 0x1221, allocated = 0xa4}
+(gdb) x/64bx pNode
+0x7f77cab01088: 0xa3    0x0d    0x80    0x28    0x00    0x04    0x97    0x7b
+0x7f77cab01090: 0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00
+0x7f77cab01098: 0x21    0x12    0xa4    0x42    0x59    0x6d    0x32    0x46
+0x7f77cab010a0: 0x4e    0x46    0x78    0x33    0x34    0x4f    0x2b    0x53
+0x7f77cab010a8: 0x00    0x06    0x00    0x0b    0x58    0x45    0x51    0x54
+0x7f77cab010b0: 0x2b    0x31    0x3a    0x6b    0x66    0x49    0x67    0x00
+0x7f77cab010b8: 0xc0    0x57    0x00    0x04    0x00    0x07    0x03    0x84
+0x7f77cab010c0: 0x80    0x2a    0x00    0x08    0x73    0xf1    0x6d    0xdc
+(gdb) x/32gx pNode
+0x7f77cab01088: 0x7b97040028800da3      0x0000000000000000
+0x7f77cab01098: 0x46326d5942a41221      0x532b4f343378464e
+0x7f77cab010a8: 0x545145580b000600      0x006749666b3a312b
+0x7f77cab010b8: 0x84030700040057c0      0xdc6df17308002a80
+0x7f77cab010c8: 0x04002400cbd25fb6      0x14000800ff287c50
+0x7f77cab010d8: 0xcd56b1fe83842342      0x3760f5a97c4524fa
+0x7f77cab010e8: 0x04002880375f5a87      0x01006000293fff4e
+0x7f77cab010f8: 0x576442a412214c00      0x54763253674f4242
+0x7f77cab01108: 0x45580b000600746e      0x49666b3a312b5451
+0x7f77cab01118: 0x0700040057c00067      0xf17308002a808403
+0x7f77cab01128: 0x2400cbd25fb6dc6d      0x0800ff287c500400
+0x7f77cab01138: 0xe342bb48c2fd1400      0xbdd778aa594e6f14
+0x7f77cab01148: 0x2880940e2bec008f      0x6000eac04dda0400
+0x7f77cab01158: 0x42a412214c000100      0x30304a6139446742
+0x7f77cab01168: 0x0b0006006e377a77      0x6b3a312b54514558
+0x7f77cab01178: 0x000057c000674966      0x0000000000000000
+(gdb) x/32gx pNode-128
+0x7f77cab00888: 0x0000000000000000      0x0000000000000000
+0x7f77cab00898: 0x0000000000000000      0x0000000000000000
+0x7f77cab008a8: 0x0000000000000000      0x0000000000000000
+0x7f77cab008b8: 0x0000000000000000      0x0000000000000000
+0x7f77cab008c8: 0x0000000000000000      0x0000000000000000
+0x7f77cab008d8: 0x0000000000000000      0x0000000000000000
+0x7f77cab008e8: 0x0000000000000000      0x0000000000000000
+0x7f77cab008f8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00908: 0x0000000000000000      0x0000000000000000
+0x7f77cab00918: 0x0000000000000000      0x0000000000000000
+0x7f77cab00928: 0x0000000000000000      0x0000000000000000
+0x7f77cab00938: 0x0000000000000000      0x0000000000000000
+0x7f77cab00948: 0x0000000000000000      0x0000000000000000
+0x7f77cab00958: 0x0000000000000000      0x0000000000000000
+0x7f77cab00968: 0x0000000000000000      0x0000000000000000
+0x7f77cab00978: 0x0000000000000000      0x0000000000000000
+(gdb) x/32gx pNode-64
+0x7f77cab00c88: 0xf17308002a808403      0x2400cbd25fb6dc6d
+0x7f77cab00c98: 0x0800ff287c500400      0x23a30826b23b1400
+0x7f77cab00ca8: 0xceab3f8bd5be2e44      0x2880885c01c6df31
+0x7f77cab00cb8: 0x600041987b870400      0x42a412214c000100
+0x7f77cab00cc8: 0x3037356f41445967      0x0b00060059526e66
+0x7f77cab00cd8: 0x6b3a312b54514558      0x040057c000674966
+0x7f77cab00ce8: 0x08002a8084030700      0xcbd25fb6dc6df173
+0x7f77cab00cf8: 0xff287c5004002400      0xef929e4b14000800
+0x7f77cab00d08: 0x0d59c1bfdf496c95      0xc26e45cb011ae290
+0x7f77cab00d18: 0xb58148c604002880      0x12214c0001006000
+0x7f77cab00d28: 0x4f3931362f6b42a4      0x0600396e71737a37
+0x7f77cab00d38: 0x312b545145580b00      0x57c0006749666b3a
+0x7f77cab00d48: 0x2a80840307000400      0x5fb6dc6df1730800
+0x7f77cab00d58: 0x7c5004002400cbd2      0x85b414000800ff28
+0x7f77cab00d68: 0xab13390ffa27b3b9      0x5770bdb12204bcf9
+0x7f77cab00d78: 0x76090400288013f7      0x4c00010060006f48
+(gdb) x/32gx pNode-100
+0x7f77cab00a48: 0x0000000000000000      0x0000000000000000
+0x7f77cab00a58: 0x0000000000000000      0x0000000000000000
+0x7f77cab00a68: 0x0000000000000000      0x0000000000000000
+0x7f77cab00a78: 0x0000000000000000      0x0000000000000000
+0x7f77cab00a88: 0x0000000000000000      0x0000000000000000
+0x7f77cab00a98: 0x0000000000000000      0x0000000000000000
+0x7f77cab00aa8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ab8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ac8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ad8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ae8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00af8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b08: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b18: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b28: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b38: 0x0000000000000000      0x0000000000000000
+(gdb) x/32gx pNode-96
+0x7f77cab00a88: 0x0000000000000000      0x0000000000000000
+0x7f77cab00a98: 0x0000000000000000      0x0000000000000000
+0x7f77cab00aa8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ab8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ac8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ad8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ae8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00af8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b08: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b18: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b28: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b38: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b48: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b58: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b68: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b78: 0x0000000000000000      0x0000000000000000
+(gdb) x/32gx pNode-80
+0x7f77cab00b88: 0x0000000000000000      0x0000000000000000
+0x7f77cab00b98: 0x0000000000000000      0x0000000000000000
+0x7f77cab00ba8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00bb8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00bc8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00bd8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00be8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00bf8: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c08: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c18: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c28: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c38: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c48: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c58: 0x0100600000000000      0x316442a412214c00
+0x7f77cab00c68: 0x724d3459447a6f6c      0x45580b0006004673
+0x7f77cab00c78: 0x49666b3a312b5451      0x0700040057c00067
+(gdb) x/32gx pNode-64
+0x7f77cab00c88: 0xf17308002a808403      0x2400cbd25fb6dc6d
+0x7f77cab00c98: 0x0800ff287c500400      0x23a30826b23b1400
+0x7f77cab00ca8: 0xceab3f8bd5be2e44      0x2880885c01c6df31
+0x7f77cab00cb8: 0x600041987b870400      0x42a412214c000100
+0x7f77cab00cc8: 0x3037356f41445967      0x0b00060059526e66
+0x7f77cab00cd8: 0x6b3a312b54514558      0x040057c000674966
+0x7f77cab00ce8: 0x08002a8084030700      0xcbd25fb6dc6df173
+0x7f77cab00cf8: 0xff287c5004002400      0xef929e4b14000800
+0x7f77cab00d08: 0x0d59c1bfdf496c95      0xc26e45cb011ae290
+0x7f77cab00d18: 0xb58148c604002880      0x12214c0001006000
+0x7f77cab00d28: 0x4f3931362f6b42a4      0x0600396e71737a37
+0x7f77cab00d38: 0x312b545145580b00      0x57c0006749666b3a
+0x7f77cab00d48: 0x2a80840307000400      0x5fb6dc6df1730800
+0x7f77cab00d58: 0x7c5004002400cbd2      0x85b414000800ff28
+0x7f77cab00d68: 0xab13390ffa27b3b9      0x5770bdb12204bcf9
+0x7f77cab00d78: 0x76090400288013f7      0x4c00010060006f48
+(gdb) x/32gx pNode-70
+0x7f77cab00c28: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c38: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c48: 0x0000000000000000      0x0000000000000000
+0x7f77cab00c58: 0x0100600000000000      0x316442a412214c00
+0x7f77cab00c68: 0x724d3459447a6f6c      0x45580b0006004673
+0x7f77cab00c78: 0x49666b3a312b5451      0x0700040057c00067
+0x7f77cab00c88: 0xf17308002a808403      0x2400cbd25fb6dc6d
+0x7f77cab00c98: 0x0800ff287c500400      0x23a30826b23b1400
+0x7f77cab00ca8: 0xceab3f8bd5be2e44      0x2880885c01c6df31
+0x7f77cab00cb8: 0x600041987b870400      0x42a412214c000100
+0x7f77cab00cc8: 0x3037356f41445967      0x0b00060059526e66
+0x7f77cab00cd8: 0x6b3a312b54514558      0x040057c000674966
+0x7f77cab00ce8: 0x08002a8084030700      0xcbd25fb6dc6df173
+0x7f77cab00cf8: 0xff287c5004002400      0xef929e4b14000800
+0x7f77cab00d08: 0x0d59c1bfdf496c95      0xc26e45cb011ae290
+0x7f77cab00d18: 0xb58148c604002880      0x12214c0001006000
+(gdb) p/x pList
+$18 = 0xf43ce0
+(gdb) x/32gx pList
+0xf43ce0:       0x00007f77cab01088      0x00007f77c8616b48
+0xf43cf0:       0x000000000003ca5b      0x0000000000f42490
+0xf43d00:       0x0000001f0007ffff      0x0000001300ffffff
+0xf43d10:       0x0000000000000000      0x000000000000af11
+0xf43d20:       0x000000000041a48c      0x000000000041a555
+0xf43d30:       0x000000000041a593      0x0000000000f42180
+0xf43d40:       0x0000000800000017      0x0000000100000001
+0xf43d50:       0x00000000a1d88901      0x0000000000000000
+0xf43d60:       0xa1d8830900000001      0x0000000000000000
+0xf43d70:       0x0000000100000000      0x00000000b897f501
+0xf43d80:       0x0000000000000000      0xa1d88b0900000001
+0xf43d90:       0x0000000000000000      0x0000000100000000
+0xf43da0:       0x00000000a1d89301      0x0000000000000000
+0xf43db0:       0xa1d8a10100000001      0x0000000000000000
+0xf43dc0:       0x0000000100000000      0x00000000a1d89d01
+0xf43dd0:       0x0000000000000000      0xa1d8990100000001
+(gdb) x/64bx pList
+0xf43ce0:       0x88    0x10    0xb0    0xca    0x77    0x7f    0x00    0x00
+0xf43ce8:       0x48    0x6b    0x61    0xc8    0x77    0x7f    0x00    0x00
+0xf43cf0:       0x5b    0xca    0x03    0x00    0x00    0x00    0x00    0x00
+0xf43cf8:       0x90    0x24    0xf4    0x00    0x00    0x00    0x00    0x00
+0xf43d00:       0xff    0xff    0x07    0x00    0x1f    0x00    0x00    0x00
+0xf43d08:       0xff    0xff    0xff    0x00    0x13    0x00    0x00    0x00
+0xf43d10:       0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00
+0xf43d18:       0x11    0xaf    0x00    0x00    0x00    0x00    0x00    0x00
+(gdb) x/32bx pList
+0xf43ce0:       0x88    0x10    0xb0    0xca    0x77    0x7f    0x00    0x00
+0xf43ce8:       0x48    0x6b    0x61    0xc8    0x77    0x7f    0x00    0x00
+0xf43cf0:       0x5b    0xca    0x03    0x00    0x00    0x00    0x00    0x00
+0xf43cf8:       0x90    0x24    0xf4    0x00    0x00    0x00    0x00    0x00
+(gdb) x/64gx pList
+0xf43ce0:       0x00007f77cab01088      0x00007f77c8616b48
+0xf43cf0:       0x000000000003ca5b      0x0000000000f42490
+0xf43d00:       0x0000001f0007ffff      0x0000001300ffffff
+0xf43d10:       0x0000000000000000      0x000000000000af11
+0xf43d20:       0x000000000041a48c      0x000000000041a555
+0xf43d30:       0x000000000041a593      0x0000000000f42180
+0xf43d40:       0x0000000800000017      0x0000000100000001
+0xf43d50:       0x00000000a1d88901      0x0000000000000000
+0xf43d60:       0xa1d8830900000001      0x0000000000000000
+0xf43d70:       0x0000000100000000      0x00000000b897f501
+0xf43d80:       0x0000000000000000      0xa1d88b0900000001
+0xf43d90:       0x0000000000000000      0x0000000100000000
+0xf43da0:       0x00000000a1d89301      0x0000000000000000
+0xf43db0:       0xa1d8a10100000001      0x0000000000000000
+0xf43dc0:       0x0000000100000000      0x00000000a1d89d01
+0xf43dd0:       0x0000000000000000      0xa1d8990100000001
+0xf43de0:       0x0000000000000000      0x0000000000000000
+0xf43df0:       0x0000000000000000      0x0000000000000000
+0xf43e00:       0x0000000000000000      0x0000000000000000
+0xf43e10:       0x0000000000000000      0x0000000000000000
+0xf43e20:       0x0000000000000000      0x0000000000000000
+0xf43e30:       0x0000000000000000      0x0000000000000000
+0xf43e40:       0x0000000000000000      0x0000000000000000
+0xf43e50:       0x0000000000000000      0x0000000000000000
+0xf43e60:       0x0000000000000000      0x0000000000000000
+0xf43e70:       0x0000000000000000      0x0000000000000000
+0xf43e80:       0x0000000000000000      0x0000000000000000
+0xf43e90:       0x0000000000000000      0x0000000000000000
+0xf43ea0:       0x0000000000000000      0x0000000000000000
+0xf43eb0:       0x0000000000000000      0x0000000000000000
+0xf43ec0:       0x0000000000000000      0x0000000000000000
+0xf43ed0:       0x0000000000000000      0x0000000000000000
+(gdb) x/64gx pList-64
+0xf436e0:       0xfffffffff90f3c70      0xfffffffffa0859e0
+0xf436f0:       0xfffffffffaf858f0      0xfffffffffbe83be0
+0xf43700:       0xfffffffffcd83af0      0xfffffffffdc81de0
+0xf43710:       0xfffffffffeb81cf0      0xffffffffffa7ffe0
+0xf43720:       0x000000000097fef0      0x000000000187e1e0
+0xf43730:       0x000000000277e0f0      0x000000000370fe60
+0xf43740:       0x000000000460fd70      0x000000000550e060
+0xf43750:       0x000000000640df70      0x000000000730c260
+0xf43760:       0x00000000078d1970      0x000000000910a460
+0xf43770:       0x0000000009ad94f0      0x000000000af08660
+0xf43780:       0x000000000be08570      0x000000000cd9a2e0
+0xf43790:       0x000000000dc06770      0x000000000eb984e0
+0xf437a0:       0x000000000fa983f0      0x00000000109966e0
+0xf437b0:       0x00000000118965f0      0x00000000127948e0
+0xf437c0:       0x00000000136947f0      0x0000000014592ae0
+0xf437d0:       0x00000000154929f0      0x0000000016390ce0
+0xf437e0:       0x0000000017290bf0      0x0000000018222960
+0xf437f0:       0x000000001908edf0      0x000000001a020b60
+0xf43800:       0x000000001af20a70      0x000000001be1ed60
+0xf43810:       0x000000001cd1ec70      0x000000001dc1cf60
+0xf43820:       0x000000001eb1ce70      0x000000001fa1b160
+0xf43830:       0x00000000207600f0      0x0000000021819360
+0xf43840:       0x000000002255e2f0      0x00000000236aafe0
+0xf43850:       0x000000002435c4f0      0x00000000254a91e0
+0xf43860:       0x000000002615a6f0      0x00000000272a73e0
+0xf43870:       0x0000000027fec370      0x00000000290a55e0
+0xf43880:       0x0000000029dea570      0x000000002aea37e0
+0xf43890:       0x000000002bbe8770      0x000000002cd35460
+0xf438a0:       0x000000002d9e6970      0x000000002eb33660
+0xf438b0:       0x000000002f7e4b70      0x0000000030931860
+0xf438c0:       0x00000000316767f0      0x000000003272fa60
+0xf438d0:       0x00000000334749f0      0x000000003452dc60
+(gdb) p/x pList
+$19 = 0xf43ce0
+(gdb) x/64gx pList-32
+0xf439e0:       0x00000000531c1170      0x000000005455c860
+0xf439f0:       0x0000000054fbf370      0x000000005635aa60
+0xf43a00:       0x0000000056e50ff0      0x00000000581ec6e0
+0xf43a10:       0x0000000058c4f1f0      0x0000000059fea8e0
+0xf43a20:       0x000000005aa4d3f0      0x000000005bde8ae0
+0xf43a30:       0x000000005c84b5f0      0x000000005dbe6ce0
+0xf43a40:       0x000000005e6497f0      0x000000005f9e4ee0
+0xf43a50:       0x00000000604db470      0x0000000061876b60
+0xf43a60:       0x00000000622d9670      0x0000000063674d60
+0xf43a70:       0x00000000640d7870      0x0000000065472f60
+0xf43a80:       0x0000000065ed5a70      0x0000000067271160
+0xf43a90:       0x0000000067cd3c70      0x000000006906f360
+0xf43aa0:       0x0000000069ad1e70      0x000000006ae6d560
+0xf43ab0:       0x000000006b963af0      0x000000006ccff1e0
+0xf43ac0:       0x000000006d761cf0      0x000000006eafd3e0
+0xf43ad0:       0x000000006f55fef0      0x00000000708fb5e0
+0xf43ae0:       0x000000007135e0f0      0x00000000726f97e0
+0xf43af0:       0x000000007315c2f0      0x00000000744f79e0
+0xf43b00:       0x0000000074fedf70      0x0000000076389660
+0xf43b10:       0x0000000076dec170      0x0000000078187860
+0xf43b20:       0x0000000078bea370      0x0000000079f85a60
+0xf43b30:       0x000000007a9e8570      0x000000007bd83c60
+0xf43b40:       0x000000007c7e6770      0x000000007db81e60
+0xf43b50:       0x000000007e5e4970      0x000000007f980060
+0xf43b60:       0x00000000ffffba9e      0x00000401ffffc7c0
+0xf43b70:       0x00000800ffffb9b0      0x01010800ffffb9b0
+0xf43b80:       0x00000c01ffffc7c0      0x01011001ffffc7c0
+0xf43b90:       0x0102010201020103      0x0102010201020102
+0xf43ba0:       0x0102010201020102      0x0102010201020102
+0xf43bb0:       0x0102010201020102      0x0102010201020102
+0xf43bc0:       0x0201020102050402      0x0201020102010201
+0xf43bd0:       0x0201020102010201      0x0201020102010201
+(gdb) x/64gx pList-64
+0xf436e0:       0xfffffffff90f3c70      0xfffffffffa0859e0
+0xf436f0:       0xfffffffffaf858f0      0xfffffffffbe83be0
+0xf43700:       0xfffffffffcd83af0      0xfffffffffdc81de0
+0xf43710:       0xfffffffffeb81cf0      0xffffffffffa7ffe0
+0xf43720:       0x000000000097fef0      0x000000000187e1e0
+0xf43730:       0x000000000277e0f0      0x000000000370fe60
+0xf43740:       0x000000000460fd70      0x000000000550e060
+0xf43750:       0x000000000640df70      0x000000000730c260
+0xf43760:       0x00000000078d1970      0x000000000910a460
+0xf43770:       0x0000000009ad94f0      0x000000000af08660
+0xf43780:       0x000000000be08570      0x000000000cd9a2e0
+0xf43790:       0x000000000dc06770      0x000000000eb984e0
+0xf437a0:       0x000000000fa983f0      0x00000000109966e0
+0xf437b0:       0x00000000118965f0      0x00000000127948e0
+0xf437c0:       0x00000000136947f0      0x0000000014592ae0
+0xf437d0:       0x00000000154929f0      0x0000000016390ce0
+0xf437e0:       0x0000000017290bf0      0x0000000018222960
+0xf437f0:       0x000000001908edf0      0x000000001a020b60
+0xf43800:       0x000000001af20a70      0x000000001be1ed60
+0xf43810:       0x000000001cd1ec70      0x000000001dc1cf60
+0xf43820:       0x000000001eb1ce70      0x000000001fa1b160
+0xf43830:       0x00000000207600f0      0x0000000021819360
+0xf43840:       0x000000002255e2f0      0x00000000236aafe0
+0xf43850:       0x000000002435c4f0      0x00000000254a91e0
+0xf43860:       0x000000002615a6f0      0x00000000272a73e0
+0xf43870:       0x0000000027fec370      0x00000000290a55e0
+0xf43880:       0x0000000029dea570      0x000000002aea37e0
+0xf43890:       0x000000002bbe8770      0x000000002cd35460
+0xf438a0:       0x000000002d9e6970      0x000000002eb33660
+0xf438b0:       0x000000002f7e4b70      0x0000000030931860
+0xf438c0:       0x00000000316767f0      0x000000003272fa60
+0xf438d0:       0x00000000334749f0      0x000000003452dc60
+(gdb) x/64gx pList
+0xf43ce0:       0x00007f77cab01088      0x00007f77c8616b48
+0xf43cf0:       0x000000000003ca5b      0x0000000000f42490
+0xf43d00:       0x0000001f0007ffff      0x0000001300ffffff
+0xf43d10:       0x0000000000000000      0x000000000000af11
+0xf43d20:       0x000000000041a48c      0x000000000041a555
+0xf43d30:       0x000000000041a593      0x0000000000f42180
+0xf43d40:       0x0000000800000017      0x0000000100000001
+0xf43d50:       0x00000000a1d88901      0x0000000000000000
+0xf43d60:       0xa1d8830900000001      0x0000000000000000
+0xf43d70:       0x0000000100000000      0x00000000b897f501
+0xf43d80:       0x0000000000000000      0xa1d88b0900000001
+0xf43d90:       0x0000000000000000      0x0000000100000000
+0xf43da0:       0x00000000a1d89301      0x0000000000000000
+0xf43db0:       0xa1d8a10100000001      0x0000000000000000
+0xf43dc0:       0x0000000100000000      0x00000000a1d89d01
+0xf43dd0:       0x0000000000000000      0xa1d8990100000001
+0xf43de0:       0x0000000000000000      0x0000000000000000
+0xf43df0:       0x0000000000000000      0x0000000000000000
+0xf43e00:       0x0000000000000000      0x0000000000000000
+0xf43e10:       0x0000000000000000      0x0000000000000000
+0xf43e20:       0x0000000000000000      0x0000000000000000
+0xf43e30:       0x0000000000000000      0x0000000000000000
+0xf43e40:       0x0000000000000000      0x0000000000000000
+0xf43e50:       0x0000000000000000      0x0000000000000000
+0xf43e60:       0x0000000000000000      0x0000000000000000
+0xf43e70:       0x0000000000000000      0x0000000000000000
+0xf43e80:       0x0000000000000000      0x0000000000000000
+0xf43e90:       0x0000000000000000      0x0000000000000000
+0xf43ea0:       0x0000000000000000      0x0000000000000000
+0xf43eb0:       0x0000000000000000      0x0000000000000000
+0xf43ec0:       0x0000000000000000      0x0000000000000000
+0xf43ed0:       0x0000000000000000      0x0000000000000000
+(gdb) p/x pList
+$20 = 0xf43ce0
+(gdb) p *(struct YLIST 0xf43cf0)
+No struct type named YLIST.
+(gdb) p *(struct YLIST 0xf43cf0)
+No struct type named YLIST.
+(gdb) fr 0
+Ambiguous command "fr 0": frame, freelist.
+(gdb) f 0
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+64      in ../src/ylib-list.c
+(gdb) set pList=0xf43cf0
+You can't do that without a process to debug.
+(gdb) p pList
+$21 = (YLIST *) 0xf43ce0
+(gdb) p *(YLIST *)0xf43cf0
+$22 = {node = {next = 0x3ca5b, previous = 0xf42490}, count = 524287}
+(gdb) p *(YLIST *)0xf43d00
+$23 = {node = {next = 0x1f0007ffff, previous = 0x1300ffffff}, count = 0}
+(gdb) p *(YLIST *)0xf43d90
+$24 = {node = {next = 0x0, previous = 0x100000000}, count = 2715325185}
+(gdb) p/x (struct YLIST *) pList
+No struct type named YLIST.
+(gdb) p/x *( YLIST *) pList
+$25 = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 0x3ca5b}
+(gdb) p *( YLIST *) pList
+$26 = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}
+(gdb) bt
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+#1  0x0000000000429ae0 in ylPopHead (pList=pList@entry=0xf43ce0) at ../src/ylib-list.c:168
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+#3  0x000000000042534f in qvPoolAlloc (pool=<optimized out>) at ../src/cpool.c:286
+#4  0x0000000000426378 in cvContextAlloc (cpool=cpool@entry=0x43b598 <dp_glb_ctxt+248>) at ../src/stacklayer.c:389
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+#6  0x00000000004048a9 in lte_dp_handle_add_gtp_lookup_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0x7fffc9cd5ec0,
+    p_dp_sw_glb=0x43b4a0 <dp_glb_ctxt>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:362
+#7  0x000000000040d2c2 in lte_s_dp_tunnel_activate (p_lte_mod_cntxt=p_lte_mod_cntxt@entry=0xf40110, p_session_cntxt=p_session_cntxt@entry=0xf30110,
+    p_bearer_cntxt=p_bearer_cntxt@entry=0xf30180, p_ecode=p_ecode@entry=0xf30104)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:152
+#8  0x000000000040f694 in lte_dp_tunnel_activate_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:3809
+#9  0x000000000040c7a8 in lte_dp_sig_msg_handler (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100,
+    g_glb_ctxt=0x43b4a0 <dp_glb_ctxt>, from_addr=...) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:5115
+#10 0x0000000000402e76 in lte_dp_process_sig_api (p_mod_ctx=0xf40110, fd=7, p_write_buffer=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:344
+#11 0x0000000000403ceb in lte_dp_sig_driver_loop (thread=thread@entry=0x67d500 <thread_info>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:856
+#12 0x00000000004029a1 in main (C=<optimized out>, V=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_main.c:171
+(gdb) p *( YLIST *) pList
+$27 = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}
+(gdb) p *(qmpool *)0xf43cb0
+$28 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+(gdb) set $n = ((struct YLIST*) pList)->node.next
+No struct type named YLIST.
+(gdb) set $n = ((YLIST*) pList)->node.next
+(gdb) set $i = 0
+(gdb) while ($n != 0 && $i < 100000)
+ >set $i = $i + 1
+ >set $n = $n->next
+ >end
+Cannot access memory at address 0x7b97040028800da3
+(gdb) p $i
+$29 = 2
+(gdb) p *pNode
+$30 = {next = 0x7b97040028800da3, previous = 0x0}
+(gdb) p pNode.
+next      previous
+(gdb) p pNode.
+next      previous
+(gdb) p *(qmbuf *)pNode
+$31 = {u = {__header__ = {next = 0x7b97040028800da3, previous = 0x0}, pool = 0x7b97040028800da3}, incarnation = 4641, allocated = 164 '\244'}
+(gdb) fr 2
+Ambiguous command "fr 2": frame, freelist.
+(gdb) f 2
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+warning: 307    ../src/cpool.c: No such file or directory
+(gdb) p &((qmpool *)pool)->list
+$32 = (YLIST *) 0xf43ce0
+(gdb) p &((qmpool *)pool)->list
+$33 = (YLIST *) 0xf43ce0
+(gdb) p * (YLIST *) 0xf43ce0
+$34 = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}
+(gdb) p  ((YLIST *) 0xf43ce0).next
+There is no member named next.
+(gdb) p  ((YLIST *) 0xf43ce0)
+$35 = (YLIST *) 0xf43ce0
+(gdb) p *(qmpool *)pool
+$36 = {magic = 3398972973, size = 2632, nbuf = 255000, alloc = 6589, chunks = {node = {next = 0x7f77c802a010, previous = 0x7f77c802a010}, count = 1},
+  list = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 248411}, lock = 0xf42490, idx_mask = 524287, inc_mask = 31,
+  final_mask = 16777215, idx_bits = 19}
+
