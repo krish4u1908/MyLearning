@@ -1,0 +1,358 @@
+(gdb) bt full
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+No locals.
+#1  0x0000000000429ae0 in ylPopHead (pList=pList@entry=0xf43ce0) at ../src/ylib-list.c:168
+        N = 0x7f77cab01088
+#2  0x00000000004252d4 in qvPoolAllocEx (pool=0xf43cb0, cErr=cErr@entry=0x0) at ../src/cpool.c:307
+        p = <optimized out>
+#3  0x000000000042534f in qvPoolAlloc (pool=<optimized out>) at ../src/cpool.c:286
+No locals.
+#4  0x0000000000426378 in cvContextAlloc (cpool=cpool@entry=0x43b598 <dp_glb_ctxt+248>) at ../src/stacklayer.c:389
+        m = <optimized out>
+#5  0x00000000004114fe in lte_ctx_alloc (p_pool=p_pool@entry=0x43b598 <dp_glb_ctxt+248>, p_error=p_error@entry=0x7fffc9cd5d04)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_port.c:96
+        p_context = <optimized out>
+#6  0x00000000004048a9 in lte_dp_handle_add_gtp_lookup_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0x7fffc9cd5ec0,
+    p_dp_sw_glb=0x43b4a0 <dp_glb_ctxt>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:362
+        p_gtp_ingress_ctx = 0x0
+        p_gtp_ingress = 0x0
+        p_gtp_lookup_msg = 0x7fffc9cd5ed0
+        error = 0
+        p_pool = 0x43b598 <dp_glb_ctxt+248>
+        ue_ipv6_str = '\000' <repeats 45 times>
+        __func__ = "lte_dp_handle_add_gtp_lookup_api"
+#7  0x000000000040d2c2 in lte_s_dp_tunnel_activate (p_lte_mod_cntxt=p_lte_mod_cntxt@entry=0xf40110, p_session_cntxt=p_session_cntxt@entry=0xf30110,
+    p_bearer_cntxt=p_bearer_cntxt@entry=0xf30180, p_ecode=p_ecode@entry=0xf30104)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:152
+        dp = {operation = 156, ecode = 0, handle = 0, pad = 0, lte_dp_msg = {tunnel_activate = {session_info = {p_apn_ue_block = 0x7f77b6927d00,
+                apn_ue_block = {handles = {ul_apn_ambr_handle = 18446744073709551615, dl_apn_ambr_handle = 18446744073709551615, ul_apn_used_count = 1,
+                    dl_apn_used_count = 3419539979}, apn_qos = {apn_aggregate_mbr_ul = 0, apn_aggregate_mbr_dl = 0}}, qli = 0, apn_index = 0,
+                operator_index = 4294967295, tos = 57 '9', version = 27 '\033', dp_thread_id = 25 '\031', imsi = {num_bytes = 12 '\f',
+                  octets = "\037\000\000\000\001\000\000"}, plmn = {num_mnc_digits = 0 '\000', octets = "\000\000"}, ue_ip_addr = {ip_addr_type = 0 '\000',
+                  ip4_addr = {addr = 16711680}, ip6_addr = {addr = "\001\002\005\b\003b\001PS\tX\360\000\000\000"}}, gtp_ul_ingress_handle = 0,
+                gtp_dl_ingress_handle = 0}, bearer_info = {ul_ingress_handle = 0, dl_ingress_handle = 0, u_peer_ip_address = {ip_addr_type = 0 '\000',
+                  ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}, gtp_ul_ingress_handle = 0, gtp_dl_ingress_handle = 0,
+                u_teid_self = 0, u_teid_dnlink_self = 0, u_self_ip_address = {ip_addr_type = 0 '\000', ip4_addr = {addr = 0}, ip6_addr = {
+                    addr = '\000' <repeats 15 times>}}, gate_handle = 0, ul_timestamp_handle = 0, ul_charging_point_handle = 0,
+                ul_rate_limit_point_handle = 0, dl_sig_tunnel_handle = 0, dl_dp_tunnel_handle = 0, dl_rate_limit_point_handle = 0,
+                dl_charging_point_handle = 0, gtp_egress_handle = 0, u_teid_peer = 0, corel_num = 0, qos = {qci = 0 '\000', uplink_mbr = 0, dnlink_mbr = 0,
+                  uplink_gbr = 0, dnlink_gbr = 0}, ul_rate_control_block_handle = 0, dl_rate_control_block_handle = 0, ul_sig_meter_handle = 0,
+                ul_dp_meter_handle = 0, dl_sig_meter_handle = 0, dl_dp_meter_handle = 0, apn_ambr_applied = 0 '\000', new_teid = 0 '\000',
+                is_li_flag = 0 '\000', qci = 0 '\000'}, charging_info = {bitmask = 0 '\000', no_of_pool = 0 '\000', time = 0, packets_uplink = 0,
+                packets_downlink = 0, octets_uplink = 0, octets_downlink = 0, time_start = 0, time_end = 0, pool_quota_usage = {0, 0, 0, 0, 0, 0, 0, 0, 0,
+                  0}, sip_filter_idx = 0, xl_cl_len = 0}}, ul_tunnel_activate = {ul_ingress_handle = 140152140889344,
+              dl_ingress_handle = 18446744073709551615, sig_plane_handle = 18446744073709551615, u_peer_ip_address = {ip_addr_type = 1 '\001', ip4_addr = {
+                  addr = 3419539979}, ip6_addr = {addr = '\000' <repeats 15 times>}}, gtp_ul_ingress_handle = 871757938794954751,
+              gtp_dl_ingress_handle = 4294967327, u_teid_self = 0, u_teid_dnlink_self = 0, u_self_ip_address = {ip_addr_type = 0 '\000', ip4_addr = {
+                  addr = 134545921}, ip6_addr = {addr = "\003b\001PS\tX\360\000\000\000\000\000\000\000"}}, gtp_egress_handle = 0, dl_dp_filter_handle = 0,
+              ul_dp_sdf_group_handle = 0, u_teid_peer = 0, apn_index = 0, operator_index = 0, dp_thread_id = 0 '\000', version = 0 '\000', qci = 0 '\000',
+              imsi = {num_bytes = 0 '\000', octets = "\000\000\000\000\000\000\000"}, ue_ip_addr = {ip_addr_type = 0 '\000', ip4_addr = {addr = 0},
+--Type <RET> for more, q to quit, c to continue without paging--
+                ip6_addr = {addr = '\000' <repeats 15 times>}}, def_gtp_ul_ingress_handle = 0, def_gtp_dl_ingress_handle = 0}, sdf_activate = {
+              session_info = {ul_sig_sdf_group_handle = 140152140889344, dl_sig_filter_handle = 18446744073709551615}, bearer_info = {
+                ul_dp_sdf_group_handle = 18446744073709551615, dl_dp_filter_handle = 14686812377169526785, dl_dp_tunnel_handle = 0,
+                ul_rate_limit_point_handle = 0, ul_charging_point_handle = 871757938794954751, ul_timestamp_handle = 4294967327, ul_gtp_ingress_handle = 0,
+                dl_gtp_ingress_handle = 577870330521911296}, sdf_info = {ul_sig_sdf_handle = 17318602620482445827, ul_dp_sdf_handle = 0,
+                ul_gate_handle = 0, ul_charging_point_handle = 0, dl_sig_sdf_handle = 0, dl_dp_sdf_handle = 0, dl_gate_handle = 0,
+                dl_charging_point_handle = 0, ul_filters_count = 0, dl_filters_count = 0, rating_group = 0, dp_meter_handle = 0, sig_meter_handle = 0,
+                metering_method = 0 '\000', charging_policy = 0 '\000', flow_status = 0 '\000', precedence = 0, qos_info = {bitmask = 0 '\000',
+                  qci = 0 '\000', bearer_identifier = 0 '\000', arp_byte = 0 '\000', arp = {bitmask = 0 '\000', priority = 0 '\000',
+                    pre_emption_capability = 0 '\000', pre_emption_vulnerability = 0 '\000'}, max_req_bw_ul = 0, max_req_bw_dl = 0, gbr_ul = 0,
+                  gbr_dl = 0}}, sdf_filters_dir = 0 '\000', pkt_filters_count = 0, charging_info = {bitmask = 0 '\000', no_of_pool = 0 '\000', time = 0,
+                packets_uplink = 0, packets_downlink = 0, octets_uplink = 0, octets_downlink = 0, time_start = 0, time_end = 0, pool_quota_usage = {0, 0,
+                  0, 0, 0, 0, 0, 0, 0, 0}, sip_filter_idx = 0, xl_cl_len = 0}, pkt_filters_info = {{pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000',
+                  precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0, presence_mask = 0}, {pkt_filter_id = 0 '\000',
+                  pkt_filter_dir = 0 '\000', precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0, presence_mask = 0}, {
+                  pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000', precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0,
+                  presence_mask = 0}, {pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000', precedence = 0 '\000', filter_handle = 0,
+                  filter_rule_handle = 0, presence_mask = 0}, {pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000', precedence = 0 '\000',
+                  filter_handle = 0, filter_rule_handle = 0, presence_mask = 0}, {pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000',
+                  precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0, presence_mask = 0}, {pkt_filter_id = 0 '\000',
+                  pkt_filter_dir = 0 '\000', precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0, presence_mask = 0}, {
+                  pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000', precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0,
+                  presence_mask = 0}}}, add_filter = {session_info = {ul_sig_sdf_group_handle = 140152140889344,
+                dl_sig_filter_handle = 18446744073709551615}, bearer_info = {ul_dp_sdf_group_handle = 18446744073709551615,
+                dl_dp_filter_handle = 14686812377169526785, dl_dp_tunnel_handle = 0, ul_rate_limit_point_handle = 0,
+                ul_charging_point_handle = 871757938794954751, ul_timestamp_handle = 4294967327, ul_gtp_ingress_handle = 0,
+                dl_gtp_ingress_handle = 577870330521911296}, sdf_info = {ul_sig_sdf_handle = 17318602620482445827, ul_dp_sdf_handle = 0,
+                ul_gate_handle = 0, ul_charging_point_handle = 0, dl_sig_sdf_handle = 0, dl_dp_sdf_handle = 0, dl_gate_handle = 0,
+                dl_charging_point_handle = 0, ul_filters_count = 0, dl_filters_count = 0, rating_group = 0, dp_meter_handle = 0, sig_meter_handle = 0,
+                metering_method = 0 '\000', charging_policy = 0 '\000', flow_status = 0 '\000', precedence = 0, qos_info = {bitmask = 0 '\000',
+                  qci = 0 '\000', bearer_identifier = 0 '\000', arp_byte = 0 '\000', arp = {bitmask = 0 '\000', priority = 0 '\000',
+                    pre_emption_capability = 0 '\000', pre_emption_vulnerability = 0 '\000'}, max_req_bw_ul = 0, max_req_bw_dl = 0, gbr_ul = 0,
+                  gbr_dl = 0}}, sdf_filters_dir = 0 '\000', pkt_filters_count = 0, charging_info = {bitmask = 0 '\000', no_of_pool = 0 '\000', time = 0,
+                packets_uplink = 0, packets_downlink = 0, octets_uplink = 0, octets_downlink = 0, time_start = 0, time_end = 0, pool_quota_usage = {0, 0,
+                  0, 0, 0, 0, 0, 0, 0, 0}, sip_filter_idx = 0, xl_cl_len = 0}, pkt_filters_info = {{pkt_filter_id = 0 '\000', pkt_filter_dir = 0 '\000',
+                  precedence = 0 '\000', filter_handle = 0, filter_rule_handle = 0, presence_mask = 0}}}, bearer_qos = {
+              ul_rate_control_block_handle = 140152140889344, dl_rate_control_block_handle = 18446744073709551615, qos = {qci = 255 '\377',
+                uplink_mbr = 4294967295, dnlink_mbr = 1, uplink_gbr = 3419539979, dnlink_gbr = 0}}, modify_sdf_qos = {
+              ul_rate_control_block_handle = 140152140889344, dl_rate_control_block_handle = 18446744073709551615, qos_info = {bitmask = 255 '\377',
+                qci = 255 '\377', bearer_identifier = 255 '\377', arp_byte = 255 '\377', arp = {bitmask = 255 '\377', priority = 255 '\377',
+                  pre_emption_capability = 255 '\377', pre_emption_vulnerability = 255 '\377'}, max_req_bw_ul = 1, max_req_bw_dl = 3419539979, gbr_ul = 0,
+                gbr_dl = 0}}, sdf_flow_status = {ul_gate_handle = 140152140889344, dl_gate_handle = 18446744073709551615, flow_status = 255 '\377'},
+            connect = {in = {self_port = 32000, self_portv6 = 46738, dhcpv4_base_port = 32631, dhcpv6_base_port = 0, self_pgw = {ip_addr_type = 255 '\377',
+                  publ_ip4_addr = {addr = 4294967295}, priv_ip4_addr = {addr = 4294967295}, ip6_addr = {
+                    addr = "\377\377\377\377\001\000\000\000\v\n\322\313\000\000\000"}}, self_sgw = {ip_addr_type = 0 '\000', publ_ip4_addr = {addr = 0},
+                  priv_ip4_addr = {addr = 0}, ip6_addr = {addr = "\377\377\377\3779\033\031\f\037\000\000\000\001\000\000"}}, self_sgsn = {
+                  ip_addr_type = 0 '\000', publ_ip4_addr = {addr = 0}, priv_ip4_addr = {addr = 16711680}, ip6_addr = {
+                    addr = "\001\002\005\b\003b\001PS\tX\360\000\000\000"}}, is_rate_control_enable = 0 '\000', ha_flag = 0 '\000',
+--Type <RET> for more, q to quit, c to continue without paging--
+                sig_node_type = 0 '\000', n3 = 0 '\000', t3 = 0, sig_node_ip = {ip_addr_type = 0 '\000', ip4_addr = {addr = 0}, ip6_addr = {
+                    addr = '\000' <repeats 15 times>}}, sig_node_port = 0, dp_port_base = 0, recovery = 0, self_li_config = {bitmask = 0,
+                  selfFirstIpInfo = {bitmask = 0, ipAddr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                          addr = '\000' <repeats 15 times>}}}, ipInterface = {length = 0 '\000', name = '\000' <repeats 254 times>}}, selfSecondIpInfo = {
+                    bitmask = 0, ipAddr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}},
+                    ipInterface = {length = 0 '\000', name = '\000' <repeats 254 times>}}, liSelfPort = 0, liSelfPortBase = 0, instanceId = 0},
+                peer_li_config = {bitmask = 0, num_df_addr = 0 '\000', default_df_addr = {{df_type = 0 '\000', df_ip = {ip_addr_type = 0 '\000',
+                        ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000', df_ip = {
+                        ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000',
+                      df_ip = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {
+                      df_type = 0 '\000', df_ip = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                            addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000', df_ip = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {
+                            addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000', df_ip = {ip_addr_type = 0 '\000',
+                        ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000', df_ip = {
+                        ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000',
+                      df_ip = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, {
+                      df_type = 0 '\000', df_ip = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                            addr = '\000' <repeats 15 times>}}}}, {df_type = 0 '\000', df_ip = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {
+                            addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}}, first_admf_med_dev_ip = {ip_addr_type = 0 '\000', ip_addr_u = {
+                      ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, second_admf_med_dev_ip = {ip_addr_type = 0 '\000',
+                    ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, first_df_med_dev_ip = {ip_addr_type = 0 '\000',
+                    ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, second_df_med_dev_ip = {ip_addr_type = 0 '\000',
+                    ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, admf_med_dev_port = 0, df_med_dev_port = 0,
+                  instanceId = 0}, num_session = 0, num_bearers = 0, num_outstanding_pkts = 0, num_apn = 0, num_operator = 0, num_traffic_filter = 0,
+                self_diam_hostname = {length = 0 '\000', data = '\000' <repeats 254 times>}, nmn_teid_mask = 0 '\000', deployment_mode = 0 '\000',
+                idrm_enable = 0 '\000', idrm_redirection_enable = 0 '\000', idrm_redirect_addr = 0, idrm_redirect_port = 0, select_timeout_value = 0},
+              out = {connect_handle = 0, start_time = 0}}, disconnect = {in = {connect_handle = 140152140889344}}, create_decision = {in = {
+                decision = 0 '\000', enable_count_flag = 125 '}'}, out = {decision_handle = 18446744073709551615}}, delete_decision = {in = {
+                decision_handle = 140152140889344}}, create_credit_pool = {in = {unit_type = 0 '\000', create_credit_pool_in_st_unit_value = {
+                  value_digits = 18446744073709551615, exponent = 18446744073709551615}, credit_pool_in_st_threshold_value = {
+                  value_digits = 14686812377169526785, exponent = 0}, total_unit = 0, threshold_time_quota = 4294967295, threshold_vol_quota = 4294967327,
+                sig_credit_pool_handle = 0, vol_quota_usage = 577870330521911296}, out = {credit_pool_handle = 17318602620482445827}},
+            delete_credit_pool = {in = {credit_pool_handle = 140152140889344}}, modify_gate = {in = {gate_handle = 140152140889344,
+                gate_state = 255 '\377'}}, modify_credit_pool = {in = {unit_type = 0 '\000', modify_credit_pool_in_st_unit_value = {
+                  value_digits = 18446744073709551615, exponent = 18446744073709551615}, modify_credit_pool_in_st_threshold_value = {
+                  value_digits = 14686812377169526785, exponent = 0}, total_unit = 0, credit_pool_handle = 871757938794954751, threshold_time_quota = 31,
+                threshold_vol_quota = 0, no_of_meter = 0, dp_gsu_pool_meter_handle = {17318602620482445827, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}},
+            create_meter = {in = {meter_type = 32000, cc_total_octets = 18446744073709551615, cc_input_octets = 18446744073709551615,
+                cc_output_octets = 14686812377169526785, threshold_volume = 0, cc_time = 0, threshold_time = 871757938794954751,
+                quota_consumption_time = 4294967327, discrete_qtm = 0, continuous_qtm = 577870330521911296, quota_holding_time = 17318602620482445827,
+                quota_validity_time = 0, tariff_change_time = 0, sig_meter_handle = 0}, out = {meter_handle = 0}}, read_meter = {in = {
+                credit_pool_handle = 140152140889344, meter_handle = 18446744073709551615, no_of_pool = 255 '\377', gsu_pool_quota_handle = {
+                  14686812377169526785, 0, 0, 871757938794954751, 4294967327, 0, 577870330521911296, 17318602620482445827, 0, 0},
+                ul_gtp_ingress_handle = 0, dl_gtp_ingress_handle = 0}, out = {packets_uplink = 0, packets_downlink = 0, octets_uplink = 0,
+                octets_downlink = 0, time = 0, gsu_pool_vol_quota = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, sip_filter_idx = 0, xl_cl_len = 0}}, read_envelope = {
+              in = {meter_handle = 140152140889344}, out = {time_start = 18446744073709551615, time_end = 18446744073709551615,
+                packets_uplink = 14686812377169526785, packets_downlink = 0, octets_uplink = 0, octets_downlink = 871757938794954751}}, configure_meter = {
+              in = {meter_handle = 140152140889344, request_type = 65535, unit_type_mask = 255 '\377', parent_object_handle = 18446744073709551615,
+--Type <RET> for more, q to quit, c to continue without paging--
+                cc_total_octets = 14686812377169526785, cc_input_octets = 0, cc_output_octets = 0, threshold_volume = 871757938794954751,
+                cc_time = 4294967327, threshold_time = 0, quota_consumption_time = 577870330521911296, discrete_qtm = 17318602620482445827,
+                continuous_qtm = 0, quota_holding_time = 0, quota_validity_time = 0, tariff_change_time = 0, unit_rate_for_time = 0,
+                unit_rate_for_input = 0, unit_rate_for_output = 0, unit_rate_for_total = 0}}, delete_meter = {in = {meter_handle = 140152140889344,
+                no_of_pool = 255 '\377', gsu_pool_handle = {18446744073709551615, 14686812377169526785, 0, 0, 871757938794954751, 4294967327, 0,
+                  577870330521911296, 17318602620482445827, 0}, ul_gtp_ingress_handle = 0, dl_gtp_ingress_handle = 0}, out = {time_start = 0, time_end = 0,
+                packets_uplink = 0, packets_downlink = 0, octets_uplink = 0, octets_downlink = 0, time = 0, gsu_pool_quota_usage = {0, 0, 0, 0, 0, 0, 0, 0,
+                  0, 0}, sip_filter_idx = 0, xl_cl_len = 0}}, read_timestamp = {in = {timestamp_handle = 140152140889344}, out = {
+                last_packet_timestamp = 4294967295}}, configure_gtp_egress = {in = {gtp_egress_handle = 140152140889344, peer_teid = 4294967295, peer_ip = {
+                  ip_addr_type = 255 '\377', ip4_addr = {addr = 4294967295}, ip6_addr = {
+                    addr = "\377\377\377\377\001\000\000\000\v\n\322\313\000\000\000"}}, tos = 0 '\000', generate_end_marker = 0 '\000',
+                num_end_marker = 0 '\000', toggle_ingress_version = 0 '\000', version = 0 '\000', self_u_teid = 0, plmn = {num_mnc_digits = 255 '\377',
+                  octets = "\377\377\377"}}}, delete_handle = {in = {dp_handle = 140152140889344}}, control_event = {in = {object_handle = 140152140889344,
+                direction = 255 '\377'}}, create_control_egress = {out = {control_egress_handle = 140152140889344}}, delete_control_egress = {in = {
+                control_egress_handle = 140152140889344}}, create_error_ind = {in = {control_egress_handle = 140152140889344}, out = {
+                error_indication_handle = 18446744073709551615}}, delete_error_ind = {in = {control_egress_handle = 140152140889344,
+                error_indication_handle = 18446744073709551615}}, create_tap = {in = {input_object_handle = 140152140889344,
+                output_object_handle = 18446744073709551615}, out = {tap_handle = 18446744073709551615}}, delete_tap = {in = {
+                tap_handle = 140152140889344}}, data_event = {in = {object_handle = 140152140889344, direction = 255 '\377'}}, charging_event = {in = {
+                handle = 140152140889344, event = 255 '\377'}}, nas_event = {in = {apn_index = 0 '\000', vlan_id = 46738, dhcpv4_base_port = 32631,
+                dhcpv6_base_port = 0, nas_client_ip = {ip_addr_type = 255 '\377', ip_addr_u = {ip4_addr = {addr = 4294967295}, ip6_addr = {
+                      addr = '\377' <repeats 12 times>, "\001\000\000"}}}, peer_info = {ip_addr = {ip_addr_type = 11 '\v', ip_addr_u = {ip4_addr = {
+                        addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, peer_port = 65535}, paylaod_length = 202971961,
+                payload = "\037\000\000\000\001", '\000' <repeats 13 times>, "\377\000\001\002\005\b\003b\001PS\tX\360", '\000' <repeats 1467 times>},
+              out = {peer_info = {ip_addr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}},
+                  peer_port = 0}, paylaod_length = 0, payload = '\000' <repeats 1499 times>}}, modify_ingress = {in = {
+                mod_gtp_ingress_handle = 140152140889344, peer_teid = 4294967295, peer_ip = {ip_addr_type = 255 '\377', ip4_addr = {addr = 4294967295},
+                  ip6_addr = {addr = "\377\377\377\377\001\000\000\000\v\n\322\313\000\000\000"}}, is_li_flag = 0 '\000', is_li_upd = 0 '\000',
+                corel_num = 0, is_sgw_li_flag = 0 '\000', is_sgw_li_upd = 0 '\000'}}, create_buffer = {in = {input_object_handle = 140152140889344}, out = {
+                buffer_obj_handle = 18446744073709551615}}, delete_buffer = {in = {buffer_obj_handle = 140152140889344}}, set_buffer_state = {in = {
+                buffer_obj_handle = 140152140889344, state = (DISCONNECT_STATE | IDLE_STATE | unknown: 0xfffffffc)}}, set_dp_trace = {
+              dp_trace_level = 0 '\000'}, dp_stats = {bitmask = 3063053568, stats = {packet_recv = {18446744073709551615, 18446744073709551615},
+                packet_sent = {14686812377169526785, 0}, packet_drop = {0, 871757938794954751}, malformed_pkt = {4294967327, 0}, looped_pkt = {
+                  577870330521911296, 17318602620482445827}, charging_drop_packet = {0, 0}, blocked_dst = {0, 0}, ims_sig_drop = {0, 0}, ims_rtp_drop = {0,
+                  0}, err_ind_recv = {0, 0}, err_ind_to_cp = {0, 0}, err_ind_sent = {0, 0}, echo_recv = {0, 0}, octets_pass = {0, 0}},
+              totalQuotaApplied = 0, totalQuotaAvailable = 0}, create_ingress = {out = {ingress_handle = 140152140889344}}, delete_ingress = {in = {
+                ingress_handle = 140152140889344}}, delete_gtp_egress = {in = {gtp_egress_handle = 140152140889344}}, unlink_meter_charging = {in = {
+                charging_point_handle = 140152140889344, meter_handle = 18446744073709551615}}, delete_charging_point = {in = {
+                charging_point_handle = 140152140889344}}, delete_timestamp = {in = {timestamp_handle = 140152140889344}}, delete_gtp_lookup = {in = {
+                ingress_handle = 140152140889344, gtp_ingress_handle = 18446744073709551615}}, add_gtp_lookup = {in = {ingress_handle = 140152140889344,
+                def_bearer_handle = 18446744073709551615, alt_def_bearer_handle = 18446744073709551615, peer_ip = {ip_addr_type = 1 '\001', ip4_addr = {
+                    addr = 3419539979}, ip6_addr = {addr = '\000' <repeats 15 times>}}, corel_num = 4294967295, u_teid_peer = 202971961, apn_index = 31,
+                operator_index = 1, nas_ipv6_ingress_handle = 0, gtp_node_type = 0 '\000', is_li_flag = 0 '\000', dp_thread_id = 255 '\377',
+                tos = 0 '\000', direction = 1 '\001', version = 2 '\002', qci = 5 '\005', imsi = {num_bytes = 8 '\b',
+                  octets = "\003b\001PS\t", <incomplete sequence \360>}, plmn = {num_mnc_digits = 0 '\000', octets = "\000\000"}, ue_ip_addr = {
+                  ip_addr_type = 0 '\000', ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, out = {gtp_ingress_handle = 0,
+                self_teid = 0, self_ip = {ip_addr_type = 0 '\000', ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}},
+                dp_thread_id = 0 '\000'}}, create_gate = {in = {input_object_handle = 140152140889344, default_gate_state = 255 '\377'}, out = {
+--Type <RET> for more, q to quit, c to continue without paging--
+                gate_handle = 18446744073709551615}}, delete_gate = {in = {gate_handle = 140152140889344}}, route6_add = {
+              eth = "\000}\222\266w\177\000\000", '\377' <repeats 16 times>, "\001\000\000\000\v\n\322\313", '\000' <repeats 16 times>, "\377\377\377\3779\033\031\f\037\000\000\000\001", '\000' <repeats 13 times>, "\377\000\001\002\005\b\003b\001PS\tX\360", '\000' <repeats 166 times>,
+              tun = '\000' <repeats 254 times>, ue_ip_addr = {addr = '\000' <repeats 15 times>}, mask_len = 0 '\000', max_addr = 0}, get_packets_info = {
+              type = 0 '\000', count = 125 '}', input_handle = {18446744073709551615, 18446744073709551615, 14686812377169526785, 0, 0, 871757938794954751,
+                4294967327, 0, 577870330521911296, 17318602620482445827, 0 <repeats 55 times>}, packets_count = 0}, mod_nas_ingress = {in = {
+                mod_nas_ingress_handle = 140152140889344, is_li_flag = 255 '\377', corel_num = 4294967295}}, med_dev_addr = {bitmask = 0 '\000',
+              first_med_df_dev_addr = {ip_addr_type = 119 'w', ip_addr_u = {ip4_addr = {addr = 4294967295}, ip6_addr = {
+                    addr = '\377' <repeats 16 times>}}}, second_med_df_dev_addr = {ip_addr_type = 1 '\001', ip_addr_u = {ip4_addr = {addr = 3419539979},
+                  ip6_addr = {addr = "\v\n\322\313", '\000' <repeats 11 times>}}}, df_med_dev_port = 0, sig_node_type = 255 '\377'},
+            usage_monitoring_event = {in = {handle = 140152140889344, octets_uplink = 18446744073709551615, octets_downlink = 18446744073709551615}},
+            dp_get_stats = {bitmask = 3063053568, no_of_uplink_gtp_pkts = 18446744073709551615, no_of_dnlink_gtp_pkts = 18446744073709551615,
+              no_of_uplink_gtp_dropped_pkts = 14686812377169526785, no_of_dnlink_gtp_dropped_pkts = 0, no_of_uplink_gtp_octets = 0,
+              no_of_dnlink_gtp_octets = 871757938794954751, no_of_uplink_gtp_dropped_octets = 4294967327, no_of_dnlink_gtp_dropped_octets = 0},
+            prn_bulk_cleanup_req = {pgw_addr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 32631}, ip6_addr = {
+                    addr = "w\177\000\000", '\377' <repeats 12 times>}}}}, set_get_sys_info = {is_get_info = 0 '\000', node_info = {node_id = 119 'w',
+                node_state = 127 '\177', node_type = 0 '\000', api_id_awaited = 4294967295, cpu_utilization = 4294967295, node_ip = {
+                  ip_addr_type = 255 '\377', ip_addr_u = {ip4_addr = {addr = 4294967295}, ip6_addr = {
+                      addr = "\377\377\377\377\001\000\000\000\v\n\322\313\000\000\000"}}}}, state = 0 '\000'}, create_filter_rule = {in = {
+                bitmask = 32000, saddr = {ip_addr = {ip_addr_type = 119 'w', ip_addr_u = {ip4_addr = {addr = 4294967295}, ip6_addr = {
+                        addr = '\377' <repeats 16 times>}}}, ip_mask = {ip_addr_type = 1 '\001', ip_addr_u = {ip4_addr = {addr = 3419539979}, ip6_addr = {
+                        addr = "\v\n\322\313", '\000' <repeats 11 times>}}}}, daddr = {ip_addr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {
+                        addr = 4294967295}, ip6_addr = {addr = "\377\377\377\3779\033\031\f\037\000\000\000\001\000\000"}}}, ip_mask = {
+                    ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                        addr = "\000\000\000\000\000\000\377\000\001\002\005\b\003b\001P"}}}}, sport = {low = 2387, high = 61528}, dport = {low = 0,
+                  high = 0}, tos = 0 '\000', proto = 0 '\000', rating_group = 0}, out = {filter_rule_handle = 0}}, del_filter_rule = {in = {
+                filter_rule_handle = 140152140889344}}, redirect_data_req = {sgw_gtp_ingress_handle = 140152140889344,
+              sgw_gtp_egress_handle = 18446744073709551615, pgw_gtp_ingress_handle = 18446744073709551615, redirect_addr = {type = 1 '\001', addr = {
+                  addr = {ip_addr = {ip_addr_type = 11 '\v', ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 12 times>, "\377\377\377\377"}},
+                    port = 6969}, url = {length = 31,
+                    data = "\000\000\001", '\000' <repeats 13 times>, "\377\000\001\002\005\b\003b\001PS\tX\360", '\000' <repeats 2018 times>}}},
+              is_redirected = 0 '\000', is_success_response = 0 '\000'}, traffic_filter_req = {index = 3063053568, port = 32631, group_id = 0,
+              start_addr = {ip_addr_type = 255 '\377', ip_addr_u = {ip4_addr = {addr = 4294967295}, ip6_addr = {
+                    addr = '\377' <repeats 12 times>, "\001\000\000"}}}, end_addr = {ip_addr_type = 11 '\v', ip_addr_u = {ip4_addr = {addr = 0},
+                  ip6_addr = {addr = '\000' <repeats 15 times>}}}, url = {length = 65535,
+                data = "\377\3779\033\031\f\037\000\000\000\001", '\000' <repeats 13 times>, "\377\000\001\002\005\b\003b\001PS\tX\360", '\000' <repeats 218 times>}, sip = {number = {length = 0 '\000', data = '\000' <repeats 30 times>}, aud_group_id = 0, vid_group_id = 0}}, apn_req = {profile_type = 0 '\000',
+              volte_apn = 125 '}', specific_prof_index = 46738, index = 32631, rating_group = 4294967295, traffic_profile = {{gate_state = 255 '\377',
+                  online_charging_status = 255 '\377', group_id = 65535, rating_group = 4294967295}, {gate_state = 255 '\377',
+                  online_charging_status = 255 '\377', group_id = 65535, rating_group = 1}, {gate_state = 11 '\v', online_charging_status = 10 '\n',
+                  group_id = 52178, rating_group = 0}, {gate_state = 0 '\000', online_charging_status = 0 '\000', group_id = 0, rating_group = 0}, {
+                  gate_state = 0 '\000', online_charging_status = 0 '\000', group_id = 0, rating_group = 4294967295}, {gate_state = 57 '9',
+                  online_charging_status = 27 '\033', group_id = 3097, rating_group = 31}, {gate_state = 1 '\001', online_charging_status = 0 '\000',
+                  group_id = 0, rating_group = 0}, {gate_state = 0 '\000', online_charging_status = 0 '\000', group_id = 0, rating_group = 16711680}, {
+                  gate_state = 1 '\001', online_charging_status = 2 '\002', group_id = 2053, rating_group = 1342267907}, {gate_state = 83 'S',
+                  online_charging_status = 9 '\t', group_id = 61528, rating_group = 0}, {gate_state = 0 '\000', online_charging_status = 0 '\000',
+                  group_id = 0, rating_group = 0} <repeats 54 times>}, qci_config = {{qci = 0 '\000', online_charging_status = 0 '\000',
+                  rating_group = 0} <repeats 86 times>}}, operator_req = {operator_id = 32000, trusted_dns = {{ip_addr_type = 119 'w', ip_addr_u = {
+--Type <RET> for more, q to quit, c to continue without paging--
+                    ip4_addr = {addr = 4294967295}, ip6_addr = {addr = '\377' <repeats 16 times>}}}, {ip_addr_type = 1 '\001', ip_addr_u = {ip4_addr = {
+                      addr = 3419539979}, ip6_addr = {addr = "\v\n\322\313", '\000' <repeats 11 times>}}}, {ip_addr_type = 0 '\000', ip_addr_u = {
+                    ip4_addr = {addr = 4294967295}, ip6_addr = {addr = "\377\377\377\3779\033\031\f\037\000\000\000\001\000\000"}}}, {
+                  ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                      addr = "\000\000\000\000\000\000\377\000\001\002\005\b\003b\001P"}}}, {ip_addr_type = 83 'S', ip_addr_u = {ip4_addr = {addr = 0},
+                    ip6_addr = {addr = '\000' <repeats 15 times>}}}, {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                      addr = '\000' <repeats 15 times>}}} <repeats 15 times>}}, billing_file = {length = 32000,
+              data = "\222\266w\177\000\000", '\377' <repeats 16 times>, "\001\000\000\000\v\n\322\313", '\000' <repeats 16 times>, "\377\377\377\3779\033\031\f\037\000\000\000\001", '\000' <repeats 13 times>, "\377\000\001\002\005\b\003b\001PS\tX\360", '\000' <repeats 934 times>}, start_time = 140152140889344,
+            data = ""}}
+        pgw_dp = {operation = 0, ecode = 0, handle = 0, pad = 0, {add_nas_lookup = {in = {ingress_handle = 0, ip = {ip_addr_type = 0 '\000', ip4_addr = {
+                    addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}, interface_length_v6 = 0 '\000',
+                interface_name_v6 = '\000' <repeats 99 times>, interface_length = 0 '\000', interface_name = '\000' <repeats 99 times>,
+                is_li_flag = 0 '\000', corel_num = 0, gtp_ingress_handle = {0 <repeats 11 times>}}, out = {nas_ingress_handle = 0,
+                nas_ingress_handle_v6 = 0}}, inject_packet = {in = {nas_ingress_handle = 0, packet_length = 0, packet = 0x0}}, create_gtp_egress = {in = {
+                input_object_handle = 0, sig_plane_handle = 0, direction = 0 '\000'}, out = {gtp_egress_handle = 0}}, create_x3_egress = {in = {
+                tap_object_handle = 0}, out = {x3_egress_handle = 0}}, configur_x3_egress = {in = {x3_egress_handle = 0, teid = 0, ip_type = 0 '\000',
+                ipv4 = 0}}, delete_x3_egress = {in = {x3_egress_handle = 0}}, create_handle = {in = {sig_dp_handle = 0}, out = {dp_handle = 0}},
+            create_timestamp = {in = {input_object_handle = 0}, out = {timestamp_handle = 0}}, create_filter_rule = {in = {bitmask = 0, saddr = {ip_addr = {
+                    ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, ip_mask = {
+                    ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, daddr = {ip_addr = {
+                    ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, ip_mask = {
+                    ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}}, sport = {low = 0,
+                  high = 0}, dport = {low = 0, high = 0}, tos = 0 '\000', proto = 0 '\000', rating_group = 0}, out = {filter_rule_handle = 0}},
+            modify_filter_rule = {in = {bitmask = 0 '\000', filter_rule_handle = 0, saddr = {ip_addr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {
+                        addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}, ip_mask = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0},
+                      ip6_addr = {addr = '\000' <repeats 15 times>}}}}, daddr = {ip_addr = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0},
+                      ip6_addr = {addr = '\000' <repeats 15 times>}}}, ip_mask = {ip_addr_type = 0 '\000', ip_addr_u = {ip4_addr = {addr = 0}, ip6_addr = {
+                        addr = '\000' <repeats 15 times>}}}}, sport = {low = 0, high = 0}, dport = {low = 0, high = 0}, tos = 0 '\000', proto = 0 '\000'}},
+            delete_filter_rule = {in = {filter_rule_handle = 0}}, create_filter = {in = {direction = 0 '\000', precedence = 0 '\000',
+                output_object_handle = 0, input_object_handle = 0}, out = {filter_handle = 0}}, add_filter_rule = {in = {filter_handle = 0,
+                filter_rule_handle = 0}}, remove_filter_rule = {in = {filter_handle = 0, filter_rule_handle = 0}}, delete_filter = {in = {
+                filter_handle = 0}}, create_charging_point = {in = {input_object_handle = 0, direction = 0 '\000'}, out = {charging_point_handle = 0}},
+            link_meter_charging = {in = {charging_point_handle = 0, meter_handle = 0}}, link_handles = {in = {input_object_handle = 0,
+                output_object_handle = 0}}, add_gtp_lookup_ha = {in = {ingress_handle = 0, peer_ip = {ip_addr_type = 0 '\000', ip4_addr = {addr = 0},
+                  ip6_addr = {addr = '\000' <repeats 15 times>}}, gtp_u_teid = 0, gtp_node_type = 0, nas_ipv6_ingress_handle = 0}, out = {
+                gtp_ingress_handle = 0, self_ip = {ip_addr_type = 0 '\000', ip4_addr = {addr = 0}, ip6_addr = {addr = '\000' <repeats 15 times>}}}},
+            data = ""}}
+        __func__ = "lte_s_dp_tunnel_activate"
+#8  0x000000000040f694 in lte_dp_tunnel_activate_api (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_mod_api.c:3809
+        p_api = 0xf30110
+#9  0x000000000040c7a8 in lte_dp_sig_msg_handler (p_dp_mod_ctx=p_dp_mod_ctx@entry=0xf40110, dp_msg=dp_msg@entry=0xf30100,
+    g_glb_ctxt=0x43b4a0 <dp_glb_ctxt>, from_addr=...) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_api_handler.c:5115
+        api_id = <optimized out>
+        ret_val = 0 '\000'
+        set_trace_ptr = 0x0
+        __func__ = "lte_dp_sig_msg_handler"
+--Type <RET> for more, q to quit, c to continue without paging--
+#10 0x0000000000402e76 in lte_dp_process_sig_api (p_mod_ctx=0xf40110, fd=7, p_write_buffer=0xf30100)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:344
+        count = <optimized out>
+        from_addr = {ip_addr_type = 1 '\001', ip_addr_u = {ip4_addr = {addr = 178684426}, ip6_addr = {
+              addr = "\n\202\246\n\004\000\000\000\024\000\000\000L\000\000"}}}
+        dp_msg = 0xf30100
+        msg_from = {sin_family = 2, sin_port = 48357, sin_addr = {s_addr = 176334346}, sin_zero = "\000\000\000\000\000\000\000"}
+        fromlen = 16
+        address = {sin_family = 2, sin_port = 47589, sin_addr = {s_addr = 176334346}, sin_zero = "\000\000\000\000\000\000\000"}
+        v6msg_from = {sin6_family = 0, sin6_port = 0, sin6_flowinfo = 0, sin6_addr = {__in6_u = {__u6_addr8 = '\000' <repeats 15 times>, __u6_addr16 = {0,
+                0, 0, 0, 0, 0, 0, 0}, __u6_addr32 = {0, 0, 0, 0}}}, sin6_scope_id = 0}
+        v6fromlen = 0
+        p_message = 0xf30100 "\205"
+        msg = {msg_name = 0x0, msg_namelen = 0, msg_iov = 0x0, msg_iovlen = 0, msg_control = 0x0, msg_controllen = 0, msg_flags = 0}
+        new_buffer = {iov_base = 0x0, iov_len = 0}
+        v6address = {sin6_family = 0, sin6_port = 0, sin6_flowinfo = 0, sin6_addr = {__in6_u = {__u6_addr8 = '\000' <repeats 15 times>, __u6_addr16 = {0,
+                0, 0, 0, 0, 0, 0, 0}, __u6_addr32 = {0, 0, 0, 0}}}, sin6_scope_id = 0}
+        write_buffer = 0xf30100 "\205"
+        ip_addr_str = '\000' <repeats 46 times>
+        __func__ = "lte_dp_process_sig_api"
+        l_temp_ = <optimized out>
+        l_size_ = <optimized out>
+        l_indx_ = <optimized out>
+#11 0x0000000000403ceb in lte_dp_sig_driver_loop (thread=thread@entry=0x67d500 <thread_info>)
+    at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_init.c:856
+        channel = <optimized out>
+        p_buffer = 0xf30100 "\205"
+        p_dp_mod_ctx = 0xf40110
+        ecode = 0
+        indx = 0
+        p_fd_info = <optimized out>
+        blackout_time = 180
+#12 0x00000000004029a1 in main (C=<optimized out>, V=<optimized out>) at /gproxy/traces/git/master/gtpd/nmn/build/../../shared/dps/src/lte_dp_main.c:171
+        ret_val = <optimized out>
+        config_params = {dp_id = 2 '\002', num_dps = 2 '\002', num_of_threads = 8 '\b', dps_mode = 0 '\000', cojoint_offset = 2 '\002', base_dp = 0 '\000',
+          haf_mod_port = 0, ra_port = 0, port_base = 55152, ctrl_plane_addr = {ip_addr = {ip_addr_type = 1 '\001', ip4_addr = {addr = 178684426},
+              ip6_addr = {addr = '\000' <repeats 15 times>}}, port = 58805}, self_addr = {ip_addr = {ip_addr_type = 1 '\001', ip4_addr = {
+                addr = 178684426}, ip6_addr = {addr = '\000' <repeats 15 times>}}, port = 8807}, mgmt_addr = {ip_addr = {ip_addr_type = 1 '\001',
+              ip4_addr = {addr = 178684426}, ip6_addr = {addr = '\000' <repeats 15 times>}}, port = 54623},
+          dp_id_list = "\001\002", '\000' <repeats 12 times>, num_peer_dps = 1 '\001'}
+        cei = 16
+        dp_id = <optimized out>
+        num_dps = <optimized out>
+        ident = "gtpd_dp-2", '\000' <repeats 21 times>
+        core_limit = {rlim_cur = 18446744073709551615, rlim_max = 18446744073709551615}
+(gdb) fr 0
+Ambiguous command "fr 0": frame, freelist.
+(gdb) t 1
+[Switching to thread 1 (Thread 0x7f77f36d2740 (LWP 1965205))]
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+64      in ../src/ylib-list.c
+(gdb) fr 0
+Ambiguous command "fr 0": frame, freelist.
+(gdb) fr
+Ambiguous command "fr": frame, freelist.
+(gdb) f 0
+#0  0x000000000042999e in ylDelete (pList=pList@entry=0xf43ce0, pNode=pNode@entry=0x7f77cab01088) at ../src/ylib-list.c:64
+64      in ../src/ylib-list.c
+(gdb) p/x pNode
+$1 = 0x7f77cab01088
+(gdb) p/x pList
+$2 = 0xf43ce0
+(gdb) p/x *(YLNODE *) pNode
+$3 = {next = 0x7b97040028800da3, previous = 0x0}
+(gdb) p/x *(YLIST *) pList
+$4 = {node = {next = 0x7f77cab01088, previous = 0x7f77c8616b48}, count = 0x3ca5b}
