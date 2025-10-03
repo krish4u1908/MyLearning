@@ -31,6 +31,168 @@ buffer size for this pool
 a list (free list) of free buffers
 
 linked list of chunks (each chunk has contiguous memory for many qmbufs/buffers)
+===========================================================================================================
+
+
+Great — below is a ready-to-use GDB script you can paste into your session or save as a file (e.g. dump_slot_neighbours.gdb) and source from gdb. It:
+
+Computes chunk, base, stride using your pool's types and sizes.
+
+Finds the chunk containing the target qmbuf address (or uses a provided chunk).
+
+Computes the buffer index idx inside that chunk.
+
+Dumps headers and payload tail bytes for idx-2 .. idx+2 (bounds checked).
+
+Prints helpful diagnostics and suggestions.
+
+Save as dump_slot_neighbours.gdb (or paste into gdb). Replace the literal addresses/variables in the example usage if needed.
+
+# dump_slot_neighbours.gdb
+# Usage:
+#   (gdb) source dump_slot_neighbours.gdb
+#   (gdb) dump_slot_neighbours <pNode_addr> <pool_addr>
+# Example:
+#   (gdb) dump_slot_neighbours 0x7f77cab01088 0xf43cb0
+
+define dump_slot_neighbours
+  # arg0 = qmbuf node address (pNode)
+  # arg1 = pool pointer
+  set $pnode_addr = (char*) $arg0
+  set $pool = (struct qmpool *) $arg1
+
+  if $pnode_addr == 0 || $pool == 0
+    printf "Usage: dump_slot_neighbours <pNode_addr> <pool_addr>\n"
+    return
+  end
+
+  # compute aligned sizes (8-byte alignment); adjust alignment expression if YALIGN different
+  set $chunk_al   = ((sizeof(struct qmchunk) + 7) & ~7)
+  set $qmbuf_al   = ((sizeof(struct qmbuf)  + 7) & ~7)
+  set $payload_al = (( $pool->size + 7) & ~7)
+  set $stride     = $qmbuf_al + $payload_al
+
+  printf "pool=%p size=%u nbuf=%u alloc=%u\n", $pool, $pool->size, $pool->nbuf, $pool->alloc
+  printf "aligned sizes: chunk_al=%u qmbuf_al=%u payload_al=%u stride=%u\n", $chunk_al, $qmbuf_al, $payload_al, $stride
+
+  # find chunk that contains pnode_addr (search pool->chunks)
+  set $cn = $pool->chunks.node.next
+  set $chunk_found = 0
+  while $cn != 0
+    set $chunk = (struct qmchunk *) $cn
+    set $start = (char*) $chunk
+    set $end   = (char*) $chunk + $chunk_al + $stride * $chunk->nbuf
+    if ($pnode_addr >= $start && $pnode_addr < $end)
+      set $chunk_found = $chunk
+      break
+    end
+    set $cn = $cn->next
+  end
+
+  if $chunk_found == 0
+    printf "ERROR: target %p not found in any pool chunk. Try passing chunk pointer instead or verify pool->chunks.\n", $pnode_addr
+    return
+  end
+
+  printf "Found chunk %p nbuf=%u range=[%p,%p)\n", $chunk_found, $chunk_found->nbuf, (char*)$chunk_found, (char*)$chunk_found + $chunk_al + $stride * $chunk_found->nbuf
+
+  set $base = (char*) $chunk_found + $chunk_al
+  printf "chunk_base=%p (first qmbuf header)\n", $base
+
+  # compute index and offset
+  set $delta = (long) ($pnode_addr - $base)
+  if ($delta < 0)
+    printf "ERROR: computed negative offset (%ld). Aborting.\n", $delta
+    return
+  end
+  set $idx = $delta / $stride
+  set $off = $delta % $stride
+  printf "target offset=%ld idx=%ld offset_in_slot=%ld\n", $delta, $idx, $off
+
+  # helper to print one slot
+  define __dump_slot
+    set $slot_idx = $arg0
+    if $slot_idx < 0 || $slot_idx >= $chunk_found->nbuf
+      printf " slot %d: out of bounds (nbuf=%u)\n", $slot_idx, $chunk_found->nbuf
+      return
+    end
+    set $qptr = (char*) $base + $slot_idx * $stride
+    printf "\n--- slot %d: qmbuf header @ %p payload @ %p ---\n", $slot_idx, $qptr, $qptr + $qmbuf_al
+    # print header struct (best-effort)
+    printf " header (qmbuf) dump:\n"
+    p/x *(struct qmbuf *) $qptr
+    # print first 32 bytes of payload and last 32 bytes of payload (if payload_al >= 32)
+    set $pstart = $qptr + $qmbuf_al
+    printf " payload start bytes (first 32):\n"
+    x/32bx $pstart
+    if ($payload_al >= 64)
+      printf " payload tail bytes (last 32):\n"
+      x/32bx $pstart + ($payload_al - 32)
+    else
+      printf " payload size %u < 64; printing full payload bytes:\n", $payload_al
+      x/%ubx $payload_al $pstart
+    end
+  end
+
+  # Dump idx-2 .. idx+2 (bounds checked)
+  set $low = $idx - 2
+  if $low < 0
+    set $low = 0
+  end
+  set $high = $idx + 2
+  if $high >= $chunk_found->nbuf
+    set $high = $chunk_found->nbuf - 1
+  end
+
+  printf "\nDumping slots %ld .. %ld around target index %ld\n", $low, $high, $idx
+  set $i = $low
+  while $i <= $high
+    __dump_slot $i
+    set $i = $i + 1
+  end
+
+  # Extra: dump 128 bytes before and after target address to inspect neighbors
+  printf "\nDumping raw bytes around target (%p) - 128 bytes before and after\n", $pnode_addr
+  x/128bx ($pnode_addr - 128)
+  x/128bx ($pnode_addr)
+end
+document dump_slot_neighbours
+Find the chunk containing a qmbuf node address, compute its index, and dump header + payload head/tail
+Usage: dump_slot_neighbours <pNode_addr> <pool_addr>
+Example: dump_slot_neighbours 0x7f77cab01088 0xf43cb0
+end
+
+How to run it quickly (one-off, without saving)
+
+If you prefer to paste directly into gdb, open gdb and paste the whole script, then run:
+
+(gdb) dump_slot_neighbours 0x7f77cab01088 0xf43cb0
+
+
+Replace 0x7f77cab01088 with your pNode address and 0xf43cb0 with your qmpool pointer.
+
+What to look for in the output
+
+target index and offset_in_slot — ensure offset is 0 (header-aligned) for a header node. If it's within payload region, the pointer may not be a header.
+
+For each dumped slot:
+
+allocated should be 0 for free nodes; if not, it’s corrupted.
+
+u.__header__.next / previous should look like valid pointers inside chunk/pool address ranges; if they are garbage, header overwritten.
+
+Payload tail bytes: see whether bytes from one slot’s tail match the corrupted header bytes — if so, strong evidence a writer overflowed payload into the next header.
+
+The raw 128-byte dumps before/after target often reveal repeating patterns, messages, or markers that show what was written.
+
+If you like, I can further:
+
+Provide a variant that sets a hardware watchpoint on the header words so you can re-run and break at the exact write instruction that corrupts the header (best for reproducible runs).
+
+Produce a small ylib-list.c debug patch to assert node addresses belong to chunk regions before pushing/pop operations.
+
+Which would you prefer next?
+=================================================================
 
 counters: alloc, nalloc, nbuf etc.
 
