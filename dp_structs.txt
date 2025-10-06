@@ -1,0 +1,60 @@
+typedef struct {
+#define LTE_DP_MEDIA_TYPE_AUDIO    (0)
+#define LTE_DP_MEDIA_TYPE_VIDEO    (1)
+#define LTE_DP_MEDIA_TYPE_MAX      (2)
+    t_sip_port_info     port_info[LTE_DP_MEDIA_TYPE_MAX];
+    time_t              create_time;
+}t_sip_parse_info;
+
+typedef struct {
+#define LTE_DP_MAX_CONF_CALL_SUBS  (4)
+#define LTE_DP_MAX_SDP_CONTENT_LEN (3200)
+    U8                      rtp_rtcp_idx; /* 0 to (LTE_DP_MAX_CONF_CALL_SUBS-1) */
+    U8                      num_info; /* Used in dedicated bearer */
+    /* xl_cl_len contains size of content-length if its more than expected */
+    U16                     xl_cl_len;
+    U32                     sip_filter_idx;
+    t_sip_parse_info        sip_info[LTE_DP_MAX_CONF_CALL_SUBS];
+} lte_dp_sip_data_t;
+
+typedef struct {
+	XLNODE      	        *p_next_object;
+	node_type_et	        type;
+	t_lock	    	        lock;
+    lte_ipv4v6_address_t    self_ip;
+    U32                     u_teid_peer;
+    U32                     corel_num;
+	U32             	    self_teid;
+    U32                     apn_index;
+    U32                     operator_index;
+    U32			            self_teidc;
+	U64						gtp_ingress_count;
+	U8                      gtp_node_type;
+    U8                      is_li_flag;
+    U8				        thread_id;
+    U8                      tos;
+    U8                      direction;
+    U8                      version;
+    U8                      is_redirected;
+    U8                      qci;
+    handle_t                nas_ipv6_ingress_handle;
+    lte_plmn_id_t	        plmn;
+    lte_imsi_t              imsi;
+    lte_imsi_str_t          imsi_str;
+    /* This variable stores the handle for the GTP Ingress 
+     * towards PGW to be used for handling DL packets for 
+     * redirected sessions */
+    handle_t                sgw_gtp_egress_handle;
+    handle_t                def_bearer_handle;
+    handle_t                alt_def_bearer_handle;
+    lte_redirect_addr_t     redirect_addr;
+    lte_ipv4v6_address_t    ue_ip_addr;
+    lte_dp_sip_data_t       *sip_data;     /* Allocated for all volte bearers */
+    U8                      *p_sip_defrag_buff; /* Allocated for def volte bearer */
+}t_gtp_ingress_int;
+
+
+typedef struct  {
+    XHNODE		      __hnode__;
+    t_gtp_ingress_int gtp_ingress;
+}t_gtp_ingress;
