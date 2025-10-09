@@ -1,0 +1,19 @@
+# supply your pool and chunk_found if needed; I'm using the addresses from your output
+set $pool = (struct qmpool *) 0xf43cb0
+set $chunk = (struct qmchunk *) 0x7f77c802a010
+set $chunk_al = ((sizeof(struct qmchunk)+7)&~7)
+set $qmbuf_al  = ((sizeof(struct qmbuf)+7)&~7)
+set $payload_al = (($pool->size + 7)&~7)
+set $stride = $qmbuf_al + $payload_al
+set $base = (char*) $chunk + $chunk_al
+
+# compute target slot index and pointer (from your earlier run)
+set $idx = 16913
+set $qptr = (char*) $base + $idx * $stride             # header address for slot 16913
+set $payload_ptr = $qptr + $qmbuf_al                   # payload start of slot 16913
+printf "qptr=%p payload_ptr=%p payload_end=%p\n", $qptr, $payload_ptr, $payload_ptr + $payload_al - 1
+
+
+
+find (char*) $base, (char*) $base + $stride * $chunk->nbuf, 0xa3,0x0d,0x80,0x28,0x00,0x04,0x97,0x7b
+
