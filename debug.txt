@@ -17,3 +17,15 @@ printf "qptr=%p payload_ptr=%p payload_end=%p\n", $qptr, $payload_ptr, $payload_
 
 find (char*) $base, (char*) $base + $stride * $chunk->nbuf, 0xa3,0x0d,0x80,0x28,0x00,0x04,0x97,0x7b
 
+
+
+payload of 16912 slot in ascii format
+
+# Dump first 256 bytes of the payload as ASCII
+x/256cb 0x7f77cab00640
+
+# Dump the *tail end* of the payload (last ~256 bytes) as ASCII
+x/256cb (0x7f77cab00640 + 2632 - 256)
+
+# Or dump the entire payload as one string (might stop at first NUL)
+x/s 0x7f77cab00640
