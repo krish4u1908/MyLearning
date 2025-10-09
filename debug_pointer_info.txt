@@ -33,4 +33,9 @@ $13 = {__hnode__ = {next = 0x0, lock = 0x0, key = {key_type = 0, ip = {ip_addr_t
         DPS_MEMFREE(p_gtp_ingress->p_sip_defrag_buff);
     }
 
+(gdb) p *(qmbuf *)0x7f77cab00628
+$14 = {u = {__header__ = {next = 0x7f77e5c65568, previous = 0x7f77e258b6c8}, pool = 0x7f77e5c65568}, incarnation = 13, allocated = 0 '\000'}
+(gdb) p 0x7f77cab00640-0x7f77cab00628
+$15 = 24
+
 
