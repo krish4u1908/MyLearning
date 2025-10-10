@@ -420,22 +420,47 @@ static uint8_t *build_cca(const req_ctx_t *ctx, uint32_t req_appid, uint32_t req
     *out_len = total_len;
     return msg;
 }
-
-/* Build CEA (Capabilities-Answer) minimal */
+/* Build CEA (Capabilities-Answer) minimal, now with Host-IP-Address, Vendor-Id, Auth-Application-Id */
 static uint8_t *build_cea(uint32_t req_hbh, uint32_t req_e2e, size_t *out_len) {
-    uint8_t *body = NULL; size_t body_len = 0;
+    uint8_t *body = NULL;
+    size_t body_len = 0;
+
+    /* Origin-Host, Origin-Realm (keep existing behavior) */
     append_avp_string(&body, &body_len, AVP_ORIGIN_HOST, origin_host);
     append_avp_string(&body, &body_len, AVP_ORIGIN_REALM, origin_realm);
+
+    /* Host-IP-Address (AVP 257) - store IPv4 address as 4 octets (network order).
+       Default: 127.0.0.1. Change this if you want a different address (or expose CLI option).
+    */
+    {
+        uint32_t ip = htonl(0x7f000001); /* 127.0.0.1 */
+        append_avp(&body, &body_len, AVP_HOST_IP_ADDRESS, 0x40, 0, (const uint8_t*)&ip, 4);
+    }
+
+    /* Vendor-Id (AVP 266) - set to 0 as requested */
+    append_avp_u32(&body, &body_len, AVP_VENDOR_ID, 0);
+
+    /* Auth-Application-Id (AVP 258) - set to 4 as requested */
+    append_avp_u32(&body, &body_len, AVP_AUTH_APPLICATION_ID, 4);
+
+    /* Result-Code */
     append_avp_u32(&body, &body_len, AVP_RESULT_CODE, 2001);
+
+    /* Compose header */
     uint32_t total = (uint32_t)(20 + body_len);
     uint8_t *msg = malloc(total);
     if (!msg) { free(body); return NULL; }
     memset(msg, 0, total);
     msg[0] = 1;
-    msg[1] = (total >> 16) & 0xff; msg[2] = (total >> 8) & 0xff; msg[3] = (total) & 0xff;
-    msg[4] = 0x00;
-    uint32_t cmd = CMD_CEA;
-    msg[5] = (cmd >> 16) & 0xff; msg[6] = (cmd >> 8) & 0xff; msg[7] = (cmd) & 0xff;
+    msg[1] = (total >> 16) & 0xff;
+    msg[2] = (total >> 8) & 0xff;
+    msg[3] = (total) & 0xff;
+    msg[4] = 0x00; /* answer */
+    uint32_t cmd = CMD_CER; /* CER/CEA share same command code 257 */
+    msg[5] = (cmd >> 16) & 0xff;
+    msg[6] = (cmd >> 8) & 0xff;
+    msg[7] = (cmd) & 0xff;
+    /* Hop-by-Hop & End-to-End */
     uint32_t hbh_be = htonl(req_hbh); memcpy(msg + 12, &hbh_be, 4);
     uint32_t e2e_be = htonl(req_e2e); memcpy(msg + 16, &e2e_be, 4);
     memcpy(msg + 20, body, body_len);
