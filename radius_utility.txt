@@ -1,0 +1,48 @@
+3) Integration Steps (copy/paste)
+
+a) Assign module type ID
+
+/* somewhere central, e.g., lte_pgw_mod_ids.h */
+#define LTE_PGW_RADIUS_MODULE  0x06
+
+
+b) Register per worker in gtpd_register_modules()
+
+for (uint8_t cei = CEI_WORKER_BASE; cei < CEI_WORKER_BASE + W; ++cei) {
+    /* QV registration (use your manifest mechanism) */
+    /* manifest.service low byte = LTE_PGW_RADIUS_MODULE; high byte patched with CEI */
+    /* qvRegisterEx(..., radius_entry, radius_timer_cb, ...); */
+
+    /* Create UDP socket(s) and register recv callback */
+    radius_register_on_cei(cei);
+}
+
+
+c) Configure via M2 (one-time per CEI)
+
+radius_cfg_t cfg = {0};
+cfg.servers_count = 1;
+/* AUTH server 10.0.0.10:1812, ACCT 10.0.0.10:1813 */
+struct sockaddr_in a = { .sin_family=AF_INET, .sin_port=htons(1812) };
+inet_pton(AF_INET, "10.0.0.10", &a.sin_addr);
+cfg.servers[0].auth_addr = *(struct sockaddr_storage*)&a; cfg.servers[0].auth_len = sizeof(a);
+a.sin_port = htons(1813);
+cfg.servers[0].acct_addr = *(struct sockaddr_storage*)&a; cfg.servers[0].acct_len = sizeof(a);
+
+strncpy(cfg.shared_secret, "secret", sizeof(cfg.shared_secret)-1);
+cfg.max_retries = 3; cfg.t1_ms = 1000; cfg.backoff = 2.0f; cfg.interim_s = 300;
+
+for (uint8_t cei = CEI_WORKER_BASE; cei < CEI_WORKER_BASE + W; ++cei)
+    radius_set_cfg(cei, &cfg);
+
+
+d) Post from M-Module (same CEI)
+
+/* Auth */
+rad_auth_req_t *ar = calloc(1,sizeof(*ar));
+ar->sess_id = ue->sess_id; ar->ue_ipv4 = ue->ipv4_net;
+ar->user_name = ue->imsi; ar->calling_station_id = ue->msisdn; ar->nas_ip = my_nas_ip;
+uint16_t dst = PGW_MODULE_ID(qvSelf(), LTE_PGW_RADIUS_MODULE);
+qvPost(PGW_MODULE_ID(qvSelf(), /*M*/0x02), dst, EV_RAD_AUTH_REQ, ar, sizeof(*ar));
+
+/* Accounting START/INTERIM/STOP (similarly) */
