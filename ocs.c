@@ -395,21 +395,25 @@ static uint8_t *build_cca(const req_ctx_t *ctx, uint32_t req_appid, uint32_t req
     append_avp_string(&body, &body_len, AVP_ORIGIN_REALM, origin_realm);
     /* Auth-Application-Id (AVP 258) - set to 4 as requested */
     append_avp_u32(&body, &body_len, AVP_AUTH_APPLICATION_ID, 4);
+    append_avp_u32(&body, &body_len, AVP_CC_REQUEST_TYPE, ctx->cc_request_type);
+    append_avp_u32(&body, &body_len, AVP_CC_REQUEST_NUMBER, ctx->cc_request_number);
     if(ctx->cc_request_type==2)
     {
-    /* Subscription-Id at top-level? Some deployments expect it inside MSCC; we'll include it inside MSCC as well.
-       We'll keep top-level Subscription-Id only if present (helps some clients). */
-    if (ctx->has_sub) {
-        /* Build Subscription-Id grouped inner */
-        uint8_t *sinner = NULL; size_t sinner_len = 0;
-        uint32_t t = htonl(1);
-        append_avp(&sinner, &sinner_len, AVP_SUBSCRIPTION_ID_TYPE, 0x40, 0, (const uint8_t*)&t, 4);
-        append_avp(&sinner, &sinner_len, AVP_SUBSCRIPTION_ID_DATA, 0x40, 0, (const uint8_t*)ctx->sub_data, strlen(ctx->sub_data));
-        append_avp(&body, &body_len, AVP_SUBSCRIPTION_ID, 0x40, 0, sinner, sinner_len);
-        free(sinner);
-    }
-    /* Add Multiple-Services-Credit-Control grouped AVP(s). For simplicity build single MSCC group constructed from request */
-    append_mscc_group(&body, &body_len, ctx);
+
+        /* Subscription-Id at top-level? Some deployments expect it inside MSCC; we'll include it inside MSCC as well.
+           We'll keep top-level Subscription-Id only if present (helps some clients). */
+        if (ctx->has_sub) {
+            /* Build Subscription-Id grouped inner */
+            uint8_t *sinner = NULL; size_t sinner_len = 0;
+            uint32_t t = htonl(1);
+            append_avp(&sinner, &sinner_len, AVP_SUBSCRIPTION_ID_TYPE, 0x40, 0, (const uint8_t*)&t, 4);
+            append_avp(&sinner, &sinner_len, AVP_SUBSCRIPTION_ID_DATA, 0x40, 0, (const uint8_t*)ctx->sub_data, strlen(ctx->sub_data));
+            append_avp(&body, &body_len, AVP_SUBSCRIPTION_ID, 0x40, 0, sinner, sinner_len);
+            free(sinner);
+        }
+
+        /* Add Multiple-Services-Credit-Control grouped AVP(s). For simplicity build single MSCC group constructed from request */
+        append_mscc_group(&body, &body_len, ctx);
     }
     /* Build header */
     uint32_t total_len = (uint32_t)(20 + body_len);
