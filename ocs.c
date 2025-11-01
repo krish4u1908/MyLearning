@@ -393,6 +393,10 @@ static uint8_t *build_cca(const req_ctx_t *ctx, uint32_t req_appid, uint32_t req
     /* Origin-Host, Origin-Realm */
     append_avp_string(&body, &body_len, AVP_ORIGIN_HOST, origin_host);
     append_avp_string(&body, &body_len, AVP_ORIGIN_REALM, origin_realm);
+    /* Auth-Application-Id (AVP 258) - set to 4 as requested */
+    append_avp_u32(&body, &body_len, AVP_AUTH_APPLICATION_ID, 4);
+    if(ctx->cc_request_type==2)
+    {
     /* Subscription-Id at top-level? Some deployments expect it inside MSCC; we'll include it inside MSCC as well.
        We'll keep top-level Subscription-Id only if present (helps some clients). */
     if (ctx->has_sub) {
@@ -406,6 +410,7 @@ static uint8_t *build_cca(const req_ctx_t *ctx, uint32_t req_appid, uint32_t req
     }
     /* Add Multiple-Services-Credit-Control grouped AVP(s). For simplicity build single MSCC group constructed from request */
     append_mscc_group(&body, &body_len, ctx);
+    }
     /* Build header */
     uint32_t total_len = (uint32_t)(20 + body_len);
     uint8_t *msg = malloc(total_len);
