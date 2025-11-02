@@ -425,7 +425,7 @@ static uint8_t *build_cca(const req_ctx_t *ctx, uint32_t req_appid, uint32_t req
     msg[2] = (total_len >> 8) & 0xff;
     msg[3] = (total_len) & 0xff;
     /* Flags: answers must have R bit cleared (we set 0), preserve P/R bits? simple 0x00 */
-    msg[4] = 0x00;
+    msg[4] = 0x40;
     uint32_t cmd = CMD_CCA;
     msg[5] = (cmd >> 16) & 0xff;
     msg[6] = (cmd >> 8) & 0xff;
