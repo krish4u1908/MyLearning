@@ -72,9 +72,11 @@ enum {
     AVP_SUBSCRIPTION_ID_DATA = 444,
     AVP_CC_REQUEST_TYPE = 416,
     AVP_CC_REQUEST_NUMBER = 415,
+    AVP_TOTAL_OCTETS = 421,
     AVP_REQUESTED_SERVICE_UNIT = 437,
     AVP_GRANTED_SERVICE_UNIT = 431,
-    AVP_TOTAL_OCTETS = 421,
+    AVP_RATING_GROUP_ID=432,
+    AVP_VALIDITY_TIMER=448,
     AVP_MULTIPLE_SERVICES_CREDIT_CONTROL = 456,
     AVP_PRODUCT_NAME = 269
 };
@@ -342,6 +344,8 @@ static int append_granted_service_unit_group(uint8_t **buf, size_t *len, uint64_
     if (append_avp(&tmp, &tmp_len, AVP_TOTAL_OCTETS, 0x40, 0, (const uint8_t*)&gbe, 8) != 0) { free(tmp); return -1; }
     /* now wrap tmp as GRANTED-SERVICE-UNIT grouped */
     if (append_avp(buf, len, AVP_GRANTED_SERVICE_UNIT, 0x40, 0, tmp, tmp_len) != 0) { free(tmp); return -1; }
+    append_avp_u32(buf, len, AVP_RATING_GROUP_ID, 220);
+    append_avp_u32(buf, len, AVP_VALIDITY_TIMER, 1000);
     free(tmp);
     return 0;
 }
