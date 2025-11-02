@@ -33,7 +33,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
-
+#include "ocs.h"
 #define DEFAULT_PORT 3868
 #define DEFAULT_ORIGIN_HOST "ocs.local"
 #define DEFAULT_ORIGIN_REALM "local.realm"
@@ -52,6 +52,9 @@ enum {
     CMD_DPR = 282,
     CMD_DPA = 282
 };
+
+
+
 
 /* AVP Codes */
 enum {
