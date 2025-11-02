@@ -326,7 +326,8 @@ static int append_granted_service_unit(uint8_t **buf, size_t *len, uint64_t gran
 
 /* Build Granted-Service-Unit grouped AVP using temporary inner */
 static int append_granted_service_unit_group(uint8_t **buf, size_t *len, uint64_t grant) {
-    uint32_t g32 = (grant > 0xFFFFFFFFULL) ? 0xFFFFFFFFU : (uint32_t)grant;
+    //uint32_t g32 = (grant > 0xFFFFFFFFULL) ? 0xFFFFFFFFU : (uint32_t)grant;
+    uint64_t g64 = (grant > 0xFFFFFFFFULL) ? 0xFFFFFFFFU : (uint64_t)grant;
     uint8_t inner_hdr[12];
     uint8_t total_octets_be[4];
     uint32_t code_be = htonl(AVP_TOTAL_OCTETS);
@@ -334,11 +335,11 @@ static int append_granted_service_unit_group(uint8_t **buf, size_t *len, uint64_
     inner_hdr[4] = 0x40;
     /* length = 8 + 4 = 12 (no vendor) */
     inner_hdr[5] = 0; inner_hdr[6] = 0; inner_hdr[7] = 12;
-    uint32_t gbe = htonl(g32); memcpy(total_octets_be, &gbe, 4);
+    uint64_t gbe = htonll(g64); memcpy(total_octets_be, &gbe, 8);
     /* inner bytes = inner_hdr (12) + total_octets (4) ? careful: inner_hdr already contains the length and header only; data follows */
     /* But for a standard AVP we should write header then data (we set header len 12 including header). Simpler: build inner properly with append_avp helper on temp */
     uint8_t *tmp = NULL; size_t tmp_len = 0;
-    if (append_avp(&tmp, &tmp_len, AVP_TOTAL_OCTETS, 0x40, 0, (const uint8_t*)&gbe, 4) != 0) { free(tmp); return -1; }
+    if (append_avp(&tmp, &tmp_len, AVP_TOTAL_OCTETS, 0x40, 0, (const uint8_t*)&gbe, 8) != 0) { free(tmp); return -1; }
     /* now wrap tmp as GRANTED-SERVICE-UNIT grouped */
     if (append_avp(buf, len, AVP_GRANTED_SERVICE_UNIT, 0x40, 0, tmp, tmp_len) != 0) { free(tmp); return -1; }
     free(tmp);
