@@ -12,7 +12,7 @@
  *
  * Example:
  *   sudo ./ocs_dynamic_builder -p 3868 -H ocs.test -R example.com -r 2001 -m 4012 -g 33554432 -d 1048576 -v
- *
+ *  ./ocs_dynamic_builder -p 3868 -H dal-01.dcelldalt.com   -R dcelldalt.com -v
  * Notes:
  * - Builds CCAs on-the-fly (no templates).
  * - MSCC (Multiple-Services-Credit-Control) AVP code: 456 (grouped).
@@ -344,7 +344,7 @@ static int append_granted_service_unit_group(uint8_t **buf, size_t *len, uint64_
     if (append_avp(&tmp, &tmp_len, AVP_TOTAL_OCTETS, 0x40, 0, (const uint8_t*)&gbe, 8) != 0) { free(tmp); return -1; }
     /* now wrap tmp as GRANTED-SERVICE-UNIT grouped */
     if (append_avp(buf, len, AVP_GRANTED_SERVICE_UNIT, 0x40, 0, tmp, tmp_len) != 0) { free(tmp); return -1; }
-    append_avp_u32(buf, len, AVP_RATING_GROUP_ID, 220);
+    append_avp_u32(buf, len, AVP_RATING_GROUP_ID, 1);
     append_avp_u32(buf, len, AVP_VALIDITY_TIMER, 1000);
     free(tmp);
     return 0;
